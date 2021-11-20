@@ -36,7 +36,7 @@ class Environment:
 
     def __init__(self,
                  dimensions: typing.Tuple[numbers.Number, ...],
-                 obstacles: typing.Optional[dict]) -> None:
+                 obstacles: typing.Optional[dict]) -> None:  # type: ignore
         """
         Constructs the necessary attributes for an environment object.
 

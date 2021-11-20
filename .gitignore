@@ -1,0 +1,11 @@
+.coverage
+.tox/.package.lock
+.tox/dist/pathingSim-0.0.0.tar.gz
+src/pathingSim.egg-info/dependency_links.txt
+src/pathingSim.egg-info/not-zip-safe
+src/pathingSim.egg-info/PKG-INFO
+src/pathingSim.egg-info/requires.txt
+src/pathingSim.egg-info/SOURCES.txt
+src/pathingSim.egg-info/top_level.txt
+tests/__pycache__/__init__.cpython-38.pyc
+tests/__pycache__/test_package.cpython-38-pytest-6.2.5.pyc

@@ -6,7 +6,6 @@ Classes:
 """
 from warnings import warn
 import typing
-import numbers
 
 from pathingSim.Obstacle import Obstacle
 
@@ -35,7 +34,7 @@ class Environment:
     """
 
     def __init__(self,
-                 dimensions: typing.Tuple[numbers.Number, ...],
+                 dimensions: typing.Tuple[typing.Union[int, float], ...],
                  obstacles: typing.Optional[dict]) -> None:  # type: ignore
         """
         Constructs the necessary attributes for an environment object.
@@ -57,8 +56,8 @@ class Environment:
             ValueError : Out of bounds parameters given for field size
         """
         (self.x, self.y, *self.z) = dimensions
-        if not isinstance(self.x, numbers.Number) \
-           or not isinstance(self.y, numbers.Number):
+        if not isinstance(self.x, (int, float)) \
+           or not isinstance(self.y, (int, float)):
             raise TypeError(f"Expected numeric values for field size but \
                             received {self.x} and {self.y}")
         if self.x <= 0 or self.y <= 0:

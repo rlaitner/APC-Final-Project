@@ -54,12 +54,16 @@ class Environment:
         Raises
         ------
             TypeError : Invalid parameters given for field size
+            ValueError : Out of bounds parameters given for field size
         """
         (self.x, self.y, *self.z) = dimensions
         if not isinstance(self.x, numbers.Number) \
            or not isinstance(self.y, numbers.Number):
             raise TypeError(f"Expected numeric values for field size but \
                             received {self.x} and {self.y}")
+        if self.x <= 0 or self.y <= 0:
+            raise ValueError("The working field must have positive,"
+                             " non-zero width and length.")
         if self.z is not None:
             warn("An environment with more than 2 dimensions was specified, \
                   but only 2 are currently supported.")

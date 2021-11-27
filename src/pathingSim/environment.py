@@ -81,7 +81,7 @@ class Environment:
             return f"Size: ({self.x}, {self.y}) with {len(self.obstacles)} \
                     obstacles: {self.obstacles}"
         except TypeError:
-           return f"Size: ({self.x}, {self.y}) with 0 obstacles" 
+            return f"Size: ({self.x}, {self.y}) with 0 obstacles"
 
     def __repr__(self) -> str:
         return f"Evironment({self.x}, {self.y}, {self.obstacles})"

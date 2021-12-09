@@ -12,11 +12,11 @@ from typing import Dict, List, Tuple, Union
 
 class PathingAlgorithm(ABC):
     @abstractmethod
-    def make_route(self) -> List[Tuple[float, float]]:
+    def make_route(self) -> None:
         pass
 
     @abstractmethod
-    def update_route(self, time: float) -> List[Tuple[float, float]]:
+    def get_position(self, time: float) -> Tuple[float, float]:
         pass
 
     @abstractmethod

@@ -1,22 +1,20 @@
 # Vehicle Class
 
 
-
-
-
 import numpy as np
 
 
 class Vehicle: 
 
-    def __init__(self,
-                vehicle_type, x_curr, y_curr, theta_curr):
+    def __init__(self,vehicle_type, x_curr, y_curr, theta_curr):
         
         if (vehicle_type == "car"):
-            self.dynamics = car_dynamics()
-        
+            self.dynamics = update_car(x_curr, y_curr, theta_curr)
+        else if (vehicle_type == "UAV"):
+            self.dynamics = update_UAV(x_curr, y_curr, theta_curr)       
+
     
-    def car_dynamics(x_curr, y_curr, theta_curr):
+    def update_car(x_curr, y_curr, theta_curr):
         u = 1
         L = 1
         W = 1
@@ -39,9 +37,24 @@ class Vehicle:
 
         return car_position 
 
-    def UAV_dynamics(x_curr, y_curr, theta_curr, t):
 
-    
+    def update_UAV(x_curr, y_curr, theta_curr):
+
+        x_dot = 1
+        y_dot = 1
+        R = 1
+
+
+        t = 1
+        x_curr += x_dot * t
+        y_curr += y_dot * t
+
+        position = np.array([x_curr, y_curr, 0])
+        UAV_position = [x_curr, y_curr, R]
+
+        return UAV_position 
+
+
 
     def calc_d(L, W):
         return (np.sqrt((L/2)**2 + (H/2)**2))

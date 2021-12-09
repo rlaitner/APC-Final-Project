@@ -2,7 +2,7 @@ class circleObstacle():
     
     # Class for circle obstacles
     def __init__(self, center, radius, cost):
-        self.center = vertices      # Center of circle object
+        self.center = center      # Center of circle object
         self.radius = radius        # Radius of circle object
         self.cost = cost            # Cost associated with the circle object
 

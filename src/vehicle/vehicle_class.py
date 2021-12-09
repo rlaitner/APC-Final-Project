@@ -3,14 +3,13 @@
 
 import numpy as np
 
-
 class Vehicle: 
 
-    def __init__(self,vehicle_type, x_curr, y_curr, theta_curr):
+    def __init__(self, vehicle_type, x_curr, y_curr, theta_curr):
         
         if (vehicle_type == "car"):
             self.dynamics = update_car(x_curr, y_curr, theta_curr)
-        else if (vehicle_type == "UAV"):
+        elif (vehicle_type == "UAV"):
             self.dynamics = update_UAV(x_curr, y_curr, theta_curr)       
 
     

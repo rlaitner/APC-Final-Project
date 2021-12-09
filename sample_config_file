@@ -32,7 +32,7 @@
           "length" : [1, 5],
           "width" : [1, 5],
           "cost" : [1, 2],
-          "dynamics" : [["exp()", 5, t, "+", "cos()", 5, t], "sin()"]
+          "dynamics" : [["exp()", 5, "t", "+", "cos()", 5, "t"], "sin()"]
       }
     }
 }

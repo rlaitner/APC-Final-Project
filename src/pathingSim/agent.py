@@ -10,7 +10,6 @@ from typing import Dict, Union
 
 from pathingSim.pathing_algorithm import PathingAlgorithm
 from pathingSim.vehicle import Vehicle
-from pathingSim.vehicle_factory import vehicle_factory
 from pathingSim.algo_factory import algo_factory
 
 class Agent():
@@ -21,7 +20,7 @@ class Agent():
 
         # Instantiate objects
         self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"])
-        self._vehicle: Vehicle = vehicle_factory(vehicle_data["vehicle_type"])
+        self._vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
 
         # Configure objects
         self._planner.set_config(algo_data)

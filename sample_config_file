@@ -12,6 +12,7 @@
 		"goal" : [100, 100],
         "goal_radius" : 1,
         "time_step" : 0.01,
+        "total_time" : 100,
     	"algorithm_type" : "A*",
     	"hyper-parameters": "0 0"
     },

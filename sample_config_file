@@ -8,8 +8,8 @@
       "vehicle_size" : 1
     },
 	"algorithm" : {
-    	"origin" : "0 0",
-		"goal" : "100 100",
+    	"origin" : [0, 0],
+		"goal" : [100, 100],
         "time_step" : 0.01,
     	"algorithm_type" : "A*",
     	"hyper-parameters": "0 0"

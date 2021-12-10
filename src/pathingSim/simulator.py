@@ -7,6 +7,7 @@ Simulator
 """
 from pathlib import Path
 import json
+import numpy as np
 
 from pathingSim.visualizer import Visualizer
 from pathingSim.environment import Environment
@@ -38,9 +39,42 @@ class Simulator():
         self._setting = Environment(self._field_size, self._obstacles_configs)
         self._robot = Agent(self._vehicle_configs, self._algorithm_configs)
 
+        # Find relevant timing data
+        self.time_horizon = self._algorithm_configs["total_time"]
+        self.time_step = self._algorithm_configs["time_step"]
 
-    def run() -> None:
-        pass
+        # Get goal size
+        self.radius = self._algorithm_configs["goal_radius"]
+
+    def _is_in_goal(self) -> bool:
+        """Checks if the agent is within the goal set"""
+        diff = self._robot.pos - self._robot.goal
+        circle = np.sum(diff * diff)
+
+        if circle <= self.radius * self.radius:
+            return True
+        else:
+            return False
+
+    def run(self) -> bool:
+        """Simulates the world for a predetermined amount of time"""
+        num_steps = self.time_horizon // self.time_step
+        steps = np.linspace(0, self.time_horizon, num=num_steps)
+
+        # is it initially in the goal set?
+        time = 0
+        if self._is_in_goal():
+                print(f"The simulation converged in {time}.")
+                return True
+        # can it get to the goal set?
+        for step in steps:
+            time += step
+            self._robot.step_toward_goal()
+            if self._is_in_goal():
+                print(f"The simulation converged in {time}.")
+                return True
+
+        return False
 
     def animate() -> None:
         pass

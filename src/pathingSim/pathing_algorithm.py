@@ -7,16 +7,13 @@ Classes
 PathingAlgorithm
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Tuple, Union
+from typing import Dict, Union
+import numpy as np
 
 
 class PathingAlgorithm(ABC):
     @abstractmethod
-    def make_route(self) -> None:
-        pass
-
-    @abstractmethod
-    def get_position(self, time: float) -> Tuple[float, float]:
+    def make_route(self, origin: np.ndarray[float, float]) -> None:
         pass
 
     @abstractmethod

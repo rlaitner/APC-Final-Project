@@ -6,13 +6,13 @@ Classes
 -------
 Agent
 """
-from operator import pos
-from typing import Dict, Union, Tuple, List
+from typing import Dict, Union
 import numpy as np
 
 from pathingSim.pathing_algorithm import PathingAlgorithm
 from pathingSim.vehicle import Vehicle
 from pathingSim.algo_factory import algo_factory
+
 
 class Agent():
     def __init__(self,
@@ -37,7 +37,7 @@ class Agent():
 
     def get_angle(self, point: np.ndarray[float, float]) -> float:
         if len(point) != len(self.pos):
-            raise ValueError("Received a trajectory position that has"+ 
+            raise ValueError("Received a trajectory position that has" +
                              " the wrong number of dimensions.")
 
         dot_prod = np.dot(self.pos, point)

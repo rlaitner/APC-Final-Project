@@ -60,7 +60,7 @@ class Vehicle:
             self.type = "UAV" 
             self.shape = "circle"
             
-        self.size = self.set_vehicle_size(scale)
+        self.size = self.__set_vehicle_size(scale)
         self.x_init = x_init
         self.y_init = y_init 
         self.theta_init = theta_init
@@ -69,21 +69,18 @@ class Vehicle:
             
     def update_dynamics(self, x, y, theta, turn_angle):
         if (self.type == "car"):
-            return self.update_gvehicle(x, y, theta, turn_angle)
+            return self.__update_gvehicle(x, y, theta, turn_angle)
         elif (self.type == "tricycle"):
-            return self.update_gvehicle(x, y, theta, turn_angle)
+            return self.__update_gvehicle(x, y, theta, turn_angle)
         elif (self.type == "UAV"):
-            return self.update_UAV(x, y)
+            return self.__update_UAV(x, y)
         
     
-    def update_gvehicle(self, x, y, theta, turn_angle, u=1, dt=0.1):
-        
-        if (np.abs(turn_angle) >= np.pi/2):
-            raise ValueError("Turn angle exceed maximum turn radius\
-                            for vehicle of type 'car'")        
-        L = self.size[0]
-        W = self.size[1]
-        
+    def __update_gvehicle(self, x, y, theta, turn_angle, u=1, dt=0.1):
+
+        self.__check_max_turn(turn_angle)
+       
+        L = self.size[0]        
         theta_dot = u/L * np.tan(turn_angle)
         x_dot = u * np.cos(theta)
         y_dot = u * np.sin(theta)
@@ -97,7 +94,7 @@ class Vehicle:
         return gvehicle_position
     
 
-    def update_UAV(self, x, y, dt=0.1):
+    def __update_UAV(self, x, y, dt=0.1):
         x_dot = 1
         y_dot = 1
         
@@ -107,9 +104,15 @@ class Vehicle:
         UAV_position = [x, y]
         
         return UAV_position 
+    
 
-
-    def set_vehicle_size(self, scale):
+    def __check_max_turn(self, turn_angle):
+        if (self.type == "car" and np.abs(turn_angle) >= np.pi/2):
+            raise ValueError("Turn angle exceed maximum turn\
+                            radius for vehicle of type 'car'")         
+        
+        
+    def __set_vehicle_size(self, scale):
         if (self.type == "car"):     
             L = 2 * scale
             W = 1.5 * scale

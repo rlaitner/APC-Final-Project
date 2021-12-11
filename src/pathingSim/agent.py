@@ -12,6 +12,7 @@ import numpy as np
 from pathingSim.pathing_algorithm import PathingAlgorithm
 from pathingSim.vehicle import Vehicle
 from pathingSim.algo_factory import algo_factory
+from pathingSim.Environment import Environment
 
 
 class Agent():
@@ -26,7 +27,7 @@ class Agent():
     heading: float
         The angle in radians of the front of the robot. This value is
         initialized so that the the robot starts pointing towards the
-        goal. 
+        goal.
 
     Methods
     -------
@@ -43,7 +44,8 @@ class Agent():
     """
     def __init__(self,
                  vehicle_data: Dict[str, Union[str, float, list]],
-                 algo_data: Dict[str, Union[str, float, list]]
+                 algo_data: Dict[str, Union[str, float, list]],
+                 setting: Environment
                  ) -> None:
         """
         Generates an Agent class and sets the required attributes
@@ -56,13 +58,15 @@ class Agent():
         algo_data: Dict[str, Union[str, float, list]]
             A dictionary containg all of the necessary information for
             initializing a path planning algorithm
+        setting: Environment
+            An obstacles filled environment to path through
         """
         # Instantiate objects
         self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"])
         self._vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
 
         # Configure objects
-        self._planner.set_config(algo_data)
+        self._planner.set_config(algo_data, setting)
         self._vehicle.set_config(vehicle_data)
 
         # Configure vehicle

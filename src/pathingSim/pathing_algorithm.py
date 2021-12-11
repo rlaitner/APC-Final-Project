@@ -7,8 +7,10 @@ Classes
 PathingAlgorithm
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Union, Tuple
+from typing import Dict, List, Union, Tuple, Type
 import numpy as np
+
+from pathingSim.Environment import Environment
 
 
 class PathingAlgorithm(ABC):
@@ -45,7 +47,10 @@ class PathingAlgorithm(ABC):
         pass
 
     @abstractmethod
-    def set_config(self, algo_dict: Dict[str, Union[str, float, List]]) -> None:
+    def set_config(self,
+                   algo_dict: Dict[str, Union[str, float, List]],
+                   setting: Type[Environment]
+                   ) -> None:
         """
         Sets hyperparameters for the required algorithms as well as the
         goal location.
@@ -55,5 +60,7 @@ class PathingAlgorithm(ABC):
             algo_dict: dict
                 Contatins the necessary hyperparameters and goal info
                 to build a valid path planning algorithm
+            setting: Environment
+                The field containing obstacles to path through
         """
         pass

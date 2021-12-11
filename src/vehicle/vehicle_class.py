@@ -34,10 +34,14 @@ class Vehicle:
     def __init__(self, vehicle_type, scale, x_init, y_init, angle):
         if (vehicle_type == "car"):
             self.type = "car"
-        elif (vehicle_type == "UAV"):
-            self.type = "UAV" 
+            self.shape = "rectangle"
         elif (vehicle_type == "tricycle"):
             self.type = "tricycle"
+            self.shape = "rectangle"
+        elif (vehicle_type == "UAV"):
+            self.type = "UAV" 
+            self.shape = "circle"
+            
         self.scale = scale
         self.size = self.set_vehicle_size()
         self.x_init = x_init

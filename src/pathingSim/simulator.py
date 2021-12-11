@@ -37,7 +37,7 @@ class Simulator():
         # Instantiate classes
         self._illustrator = Visualizer()
         self._setting = Environment(self._field_size, self._obstacles_configs)
-        self._robot = Agent(self._vehicle_configs, self._algorithm_configs)
+        self._robot = Agent(self._vehicle_configs, self._algorithm_configs, self._setting)
 
         # Find relevant timing data
         self.time_horizon = self._algorithm_configs["total_time"]

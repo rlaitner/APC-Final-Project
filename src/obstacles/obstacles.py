@@ -25,7 +25,7 @@ class rectangleObstacle():
         self.lines = [[(origin[0], origin[1]), (origin[0] + width, origin[1])], 
                       [(origin[0], origin[1]), (origin[0], origin[1] + length)],
                       [(origin[0], origin[1] + length), (origin[0] + width, origin[1] + length)],
-                      [(origin[0] + width, origin[1]), (origin[1] + width, origin[1] + length)]]
+                      [(origin[0] + width, origin[1]), (origin[0] + width, origin[1] + length)]]
         
 class triangleObstacle():
 

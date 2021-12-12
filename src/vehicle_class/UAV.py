@@ -1,7 +1,6 @@
 from vehicle_class.vehicle import Vehicle
 import numpy as np
 
-
 class UAV(Vehicle):
     
     def __init__(self, vehicle_type, init_position, scale):
@@ -11,9 +10,9 @@ class UAV(Vehicle):
         self.size = R
         self.shape = "circle"
 
-    def update_dynamics(self, x, y, dt=0.1):
-        x_dot = 1
-        y_dot = 1
+    def update_dynamics(self, x, y, U, dt=0.5):
+        x_dot = U[0]
+        y_dot = U[1]
         
         x += x_dot * dt
         y += y_dot * dt

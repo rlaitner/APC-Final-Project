@@ -2,9 +2,9 @@ from vehicle_class.vehicle import Vehicle
 import numpy as np
 
 class Tricycle(Vehicle):
-
+    
     def __init__(self, vehicle_type, init_position, scale):
-                
+        
         super().__init__(vehicle_type, init_position)
         L = 1 * scale
         W = 0.25 * scale
@@ -27,4 +27,3 @@ class Tricycle(Vehicle):
 
         return tricycle_position            
     
-   

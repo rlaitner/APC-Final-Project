@@ -3,7 +3,6 @@ Create vehicle for path planning.
 
 Classes:
     Vehicle
-
 '''
 import numpy as np
 
@@ -15,37 +14,19 @@ class Vehicle:
 
     Attributes:
     -----------------------
-    x : double 
-        Position of COM along the x-axis on the map in cm
 
-    y : double 
-        Position of COM along the y-axis on the map in cm
+    vehicle_type: String
+        vehicle type from library 
 
-    theta : double 
-        Angle between x-axis and centerline of vehicle in radians 
-        
-    
-    Methods: 
-    ----------------------
-    
-    update_gvehicle():
-        Updates the position of the ground vehicle given its dynamics 
-        
-        returns:
-            List of 
-            
-    
-    update_UAV():
-        Updates the position of the Unmanned Aerial Vehicle given its dynamics 
-        
-    set_vehicle_size():
-        Sets the appropriate dimensions of the vehicle given the scaling factor 
-        
-    update_dynamics():
-        Updates vehicle dynamics given vehicle type and control input
-    
-    
-    
+    init_poisition: array 
+        x : double (required)
+            Position of COM along the x-axis on the map in cm
+
+        y : double (required)
+            Position of COM along the y-axis on the map in cm
+
+        theta : double (optional) 
+            Angle between x-axis and centerline of vehicle in radians 
 
     ''' 
 

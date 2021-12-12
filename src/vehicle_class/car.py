@@ -4,7 +4,7 @@ import numpy as np
 class Car(Vehicle):
     
     def __init__(self, vehicle_type, init_position, scale):
-        
+    
         super().__init__(vehicle_type, init_position)
         L = 2 * scale
         W = 1.5 * scale        
@@ -12,13 +12,14 @@ class Car(Vehicle):
         self.theta_init = init_position[2]
         self.shape = "rectangle"
 
+
     
     def __check_max_turn(self, turn_angle):
         if (self.type == "car" and np.abs(turn_angle) >= np.pi/2):
             raise ValueError("Turn angle exceed maximum turn\
                             radius for vehicle of type 'car'")         
         
-        
+
     def update_dynamics(self, x, y, theta, turn_angle, u=1, dt=0.1):
         
         self.__check_max_turn(theta)
@@ -35,5 +36,4 @@ class Car(Vehicle):
         car_position = [x, y, theta]        
 
         return car_position
-
-   
+        

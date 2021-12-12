@@ -11,14 +11,13 @@ class UAV(Vehicle):
         self.size = R
         self.shape = "circle"
 
-    def update_dynamics(self, x, y, dt=0.1):
-        x_dot = 1
-        y_dot = 1
+    def update_dynamics(self, x, y, U, dt=0.5):
+        x_dot = U[0]
+        y_dot = U[1]
         
         x += x_dot * dt
         y += y_dot * dt
         
         UAV_position = [x, y]
         
-        return UAV_position         
-    
+        return UAV_position   

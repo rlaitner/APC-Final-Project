@@ -1,104 +1,83 @@
 import obstacles
-import numpy as np
-from typing import List, Tuple
+import vehicle_class
+import collisionDetection
+import numpy as np    
 
-
-def rectangleLines(obstacle: List[Tuple[np.ndarray, float]]):
-    # Creates lines of a rectangle
-    lines = [[(obstacles[0][0], obstacles[0][1]), (obstacles[0][0] + obstacles[2], obstacles[0][1])],
-             [(obstacles[0][0], obstacles[0][1]), (obstacles[0][0], obstacles[0][1] + obstacles[1])],
-             [(obstacles[0][0], obstacles[0][1] + obstacles[1]), (obstacles[0][0] + obstacles[2], obstacles[1] + obstacles[1])],
-             [(obstacles[0] + obstacles[2], obstacles[1]), (obstacles[0] + obstacles[2], obstacles[1] + obstacles[1])]]
-
-    return lines
-
-
-def triangleLines(obstacle: List[Tuple[np.ndarray, float]]):
-    # Creates lines of a triangle
-    lines = [[(obstacles[0][0], obstacles[0][1]), (obstacles[1][0], obstacles[1][1])],
-             [(obstacles[0][0], obstacles[0][1]), (obstacles[2][0], obstacles[2][1])],
-             [(obstacles[1][0], obstacles[1][1]), (obstacles[2][0], obstacles[2][1])]]
-
-    return lines
-
-
-def avail_config(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, float]]) -> bool:
+def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, float]]) -> bool:
 
     """
-    Check if a configuration is in the free space.
-
+    Check to see if a configuration is in the free space.
+    
     This function checks if the configuration q lies outside of all the obstacles in the connfiguration space.
-
-    @param q: An np.ndarray of shape (2,) representing a robot configuration.
-    @param obstacles: A list of obstacles. Each obstacle is a tuple of the form (center, radius) representing a circle.
-    @return: True if the configuration is in the free space, i.e. it lies outside of all the circles in `obstacles`.
+    
+    @param q: An np.ndarray describing a shape representing a random point
+    @param obstacles: A list of obstacles. A circle obstacle is a tuple of the form (center, radius) representing a circle,
+    a rectangle obstacle is a tuple of the form (center, length, width), and a triangle obstacle is a tuple of the 
+    form (vertices).
+    @return: True if the configuration is in the free space, i.e. it lies outside of all the obstacles in `obstacles`. 
              Otherwise return False.
     """
+    
+    # Store x,y coordinates of point
+    x = q[0]
+    y = q[1]
+    
+    for i in range(0, len(obstacles)):
+        
+        # Store current obstacle
+        curr_obstacle = obstacles[i]
+        
+        # If obstacle is a circle
+        if len(obstacles[i]) == 2:
+            
+            # Store circle center (x,y) value 
+            center = curr_obstacle[0]
+            center_x = center[0]
+            center_y = center[1]
+            
+            # Store circle radius 
+            r = curr_obstacle[1]
+        
+            # Set bounds of y for circle at current point 
+            y_max = center_y + np.sqrt(np.abs(r**2 - (x-center_x)**2))
+            y_min = center_y - np.sqrt(np.abs(r**2 - (x-center_x)**2))
+        
+            # Set bounds of x for circle at current point 
+            x_max = center_x + np.sqrt(np.abs(r**2 - (y-center_y)**2))
+            x_min = center_x - np.sqrt(np.abs(r**2 - (y-center_y)**2))
+        
+            # Check bounds of current y 
+            if ((y >= y_min) and (y <= y_max) and (x >= x_min) and (x <= x_max)):
+                return False 
+        
+        # If obstacle is a rectangle
+        if len(obstacles[i]) != 2 and obstacles[i][0] == tuple:
+            x1 = curr_obstacle.vertices[0]
+            x2 = curr_obstacle.vertices[3]
+            y1 = curr_obstacle.vertices[1]
+            y2 = curr_obstacle.vertices[2]
+            
+            if ((x > x1) and (x < x2) and (y > y1) and (y < y2)):
+                return False
+            
+        # If obstacle is a triangle
+        else:
+            ax, ay = curr_obstacle[0]
+            bx, by = curr_obstacle[1]
+            cx, cy = curr_obstacle[2]
+            
+            # Line 1
+            side_1 = (x - bx) * (ay - by) - (ax - bx) * (y - by)
+            
+            # Line 2
+            side_2 = (x - cx) * (by - cy) - (bx - cx) * (y - cy)
 
-    # If the vehicle is a UAV and is represented as a circle
-    if len(q) == 2:
-        for i in range(0, len(obstacles)):
-
-            # Obstacle is a circle
-            if len(obstacles[i]) == 2:
-
-                # Compare radii
-                if q[1] == obstacles[i][1]:
-                    return True
-                else:
-                    return False
-
-            # Obstacle is a rectangle
-            if len(obstacles[i]) != 2 and obstacles[i][0] == tuple:
-                lines = rectangleLines(obstacles[i])
-                for k in lines:
-                    initPoint = lines[k][0]
-                    endPoint = lines[k][1]
-                    selectedLine = endPoint - initPoint
-                    selectedLineNorm = selectedLine / np.linalg.norm(selectedLine)
-                    nabla = (np.dot(selectedLineNorm, (initPoint - q[0]))) ** 2 - (np.dot(initPoint - q[0], initPoint - q[0]) - q[1] ** 2)
-
-                    # If nabla >= 0, then the vehicle is in collision with the obstacle
-                    if nabla >= 0:
-                        return False
-                    else:
-                        return True
-
-            # Obstacle is a triangle
-            else:
-                lines = triangleLines(obstacles[i])
-                for k in lines:
-                    initPoint = lines[k][0]
-                    endPoint = lines[k][1]
-                    selectedLine = endPoint - initPoint
-                    selectedLineNorm = selectedLine / np.linalg.norm(selectedLine)
-                    nabla = (np.dot(selectedLineNorm, (initPoint - q[0]))) ** 2 - (np.dot(initPoint - q[0], initPoint - q[0]) - q[1] ** 2)
-
-                    # If nabla >= 0, then the vehicle is in collision with the obstacle
-                    if nabla >= 0:
-                        return False
-                    else:
-                        return True
-
-    # If the vehicle is a car or tricycle and is represented as a rectangle
-    else:
-        for i in range(0, len(obstacles)):
-
-            # Obstacle is a circle
-            if len(obstacles[i]) == 2:
-                lines = rectangleLines(obstacles[i])
-                for k in lines:
-                    initPoint = lines[k][0]
-                    endPoint = lines[k][1]
-                    selectedLine = endPoint - initPoint
-                    selectedLineNorm = selectedLine / np.linalg.norm(selectedLine)
-                    nabla = (np.dot(selectedLineNorm, (initPoint - q[0]))) ** 2 - (np.dot(initPoint - q[0], initPoint - q[0]) - q[1] ** 2)
-
-                    # If nabla >= 0, then the vehicle is in collision with the obstacle
-                    if nabla >= 0:
-                        return False
-                    else:
-                        return True
-
-            if len(obstacles[i]) != 2 and obstacles[i][0] == tuple:
-                pass
+            # Line 3
+            side_3 = (x - ax) * (cy - ay) - (cx - ax) * (y - ay)
+            
+            inside = (side_1 < 0.0) == (side_2 < 0.0) == (side_3 < 0.0)
+            
+            if inside == True:
+                return False
+        
+    return True 

@@ -11,12 +11,12 @@ def test_origin(rectangleObject):
 
 def test_length(rectangleObject):
     assert rectangleObject.length == 4
-pyte
+
 def test_width(rectangleObject):
     assert rectangleObject.width == 3
 
-def test_lines(rectangleObject):
-    assert rectangleObject.lines == [[(2, 7), (5, 7)], 
-                                     [(2, 7), (2, 11)], 
-                                     [(2, 11), (5, 11)], 
-                                     [(5, 7), (5, 11)]]
+def test_vertices(rectangleObject):
+    assert rectangleObject.vertices == [[2, 7], 
+                                        [2, 11],
+                                        [5, 11],
+                                        [5, 7]]

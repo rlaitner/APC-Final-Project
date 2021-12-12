@@ -4,7 +4,8 @@ import numpy as np
 class Car(Vehicle):
     
     def __init__(self, vehicle_type, init_position, scale):
-        
+
+        super().__init__(vehicle_type, init_position)
         L = 2 * scale
         W = 1.5 * scale        
         self.size = (L,W)
@@ -35,6 +36,4 @@ class Car(Vehicle):
         car_position = [x, y, theta]        
 
         return car_position
-    
-    def get_shape(self):
-        return self.shape        
+        

@@ -5,6 +5,7 @@ class Tricycle(Vehicle):
     
     def __init__(self, vehicle_type, init_position, scale):
         
+        super().__init__(vehicle_type, init_position)
         L = 1 * scale
         W = 0.25 * scale
         self.size = (L,W)
@@ -25,7 +26,4 @@ class Tricycle(Vehicle):
         tricycle_position = [x, y, theta]        
 
         return tricycle_position            
-    
-    def get_shape(self):
-        return self.shape
     

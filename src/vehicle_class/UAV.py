@@ -6,6 +6,7 @@ class UAV(Vehicle):
     
     def __init__(self, vehicle_type, init_position, scale):
         
+        super().__init__(vehicle_type, init_position)
         R = 0.5 * scale
         self.size = R
         self.shape = "circle"
@@ -21,5 +22,3 @@ class UAV(Vehicle):
         
         return UAV_position         
     
-    def get_shape(self):
-        return self.shape

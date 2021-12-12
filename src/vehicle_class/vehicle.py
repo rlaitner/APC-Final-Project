@@ -35,5 +35,3 @@ class Vehicle:
         self.x_init = init_position[0]
         self.y_init = init_position[1] 
         
-    def get_type(self):
-        return self.type

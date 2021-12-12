@@ -30,8 +30,7 @@ class Vehicle:
 
     ''' 
 
-    def __init__(self, vehicle_type, init_position):
-        self.type = vehicle_type    
+    def __init__(self, init_position):
         self.x_init = init_position[0]
         self.y_init = init_position[1] 
         

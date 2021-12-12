@@ -3,9 +3,10 @@ import numpy as np
 
 class UAV(Vehicle):
     
-    def __init__(self, vehicle_type, init_position, scale):
+    def __init__(self, init_position, scale):
         
-        super().__init__(vehicle_type, init_position)
+        super().__init__(init_position)
+        self.type = "UAV"
         R = 0.5 * scale
         self.size = R
         self.shape = "circle"

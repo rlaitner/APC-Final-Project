@@ -3,9 +3,10 @@ import numpy as np
 
 class Car(Vehicle):
     
-    def __init__(self, vehicle_type, init_position, scale):
+    def __init__(self, init_position, scale):
         
-        super().__init__(vehicle_type, init_position)
+        super().__init__(init_position)
+        self.type = "car"
         L = 2 * scale
         W = 1.5 * scale        
         self.size = (L,W)
@@ -14,7 +15,7 @@ class Car(Vehicle):
 
     
     def __check_max_turn(self, turn_angle):
-        if (self.type == "car" and np.abs(turn_angle) >= np.pi/2):
+        if (np.abs(turn_angle) >= np.pi/2):
             raise ValueError("Turn angle exceed maximum turn\
                             radius for vehicle of type 'car'")         
         

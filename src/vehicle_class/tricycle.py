@@ -4,9 +4,10 @@ import numpy as np
 
 class Tricycle(Vehicle):
     
-    def __init__(self, vehicle_type, init_position, scale):
+    def __init__(self, init_position, scale):
                 
-        super().__init__(vehicle_type, init_position)
+        super().__init__(init_position)
+        self.type = "tricycle"
         L = 1 * scale
         W = 0.25 * scale
         self.size = (L,W)

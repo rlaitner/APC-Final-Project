@@ -1,4 +1,4 @@
-from vehicle.py import Vehicle
+from vehicle_class.vehicle import Vehicle
 import numpy as np
 
 class Tricycle(Vehicle):

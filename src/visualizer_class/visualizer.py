@@ -2,6 +2,7 @@ from matplotlib import pyplot as plt
 from matplotlib import animation
 from matplotlib import patches as patches
 
+
 class Visualizer():
     
     def __init__(self, dims, obstacles, vehicle):
@@ -16,19 +17,21 @@ class Visualizer():
         ax.set_ylim(0,self.y)
         
         for obstacle in self.obstacles:
-            if (obstacle.shape == "rectangle"):
-                x = obstacle.position[0]
-                y = obstacle.position[1]
-                rect = patches.Rectangle((x, y), obstacle.width, obstacle.length)
-                ax.add_patch(rect)
-            elif (obstacle.shape == "circle"):
-                x = obstacle.position[0]
-                y = obstacle.position[1]
-                circ = patches.Circle((x, y), obstacle.radius)
-                ax.add_patch(circ)  
-            elif (obstacle.shape == "triangle"):
-                xy1 = obstacle.position[0]
-                xy2 = obstacle.position[1]
-                xy3 = obstacle.position[2]
-                triang = patches.Polygon((xy1, xy2, xy3))
-                ax.add_patch(triang) 
+            ax.add_patch(self.generate_shape(obstacle))
+
+  
+    def generate_shape(self, obstacle):
+        if (obstacle.shape == "rectangle"):
+            x,y = (obstacle.position[0], obstacle.position[1])
+            rectangle = patches.Rectangle((x, y), obstacle.width, obstacle.length)
+            return rectangle
+        elif (obstacle.shape == "circle"):
+            x,y = (obstacle.position[0], obstacle.position[1])
+            circle = patches.Circle((x, y), obstacle.radius)
+            return circle
+        elif (obstacle.shape == "triangle"):
+            verts = (obstacle.position[0], obstacle.position[1], 
+                     obstacle.position[2])
+            triangle = patches.Polygon(verts)
+            return triangle
+    

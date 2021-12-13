@@ -12,7 +12,7 @@ from pathingSim.pathing_algorithm import PathingAlgorithm
 # ---------------------------------------------------------------------
 # Add PathingAlgorithm implmentations here
 from pathingSim.a_star import AStar
-from pathingSim.RRT import RRT
+from RRT.RRTalgo import RRT
 # ---------------------------------------------------------------------
 
 

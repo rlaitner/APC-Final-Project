@@ -7,6 +7,8 @@ Simulator
 """
 from pathlib import Path
 import json
+from typing import Union
+from matplotlib import pyplot as plt
 import numpy as np
 
 from pathingSim.visualizer import Visualizer
@@ -71,6 +73,7 @@ class Simulator():
         if self._is_in_goal():
             print(f"The simulation converged in {time}.")
             return True
+
         # can it get to the goal set?
         for step in steps:
             time += step
@@ -81,8 +84,17 @@ class Simulator():
 
         return False
 
-    def animate() -> None:
-        pass
+    def animate(self, file_name:Union[str, None] = None) -> None:
+        fig, ax = self._illustrator.render_environment()
+        ani = self._illustrator.render_path(fig, ax, self._robot.trajectory)
+
+        try:
+            ani.save(file_name)
+        except Exception:
+            pass  # Don't block KeyboardInterrupt
+        finally:
+            plt.show()
+
 
 def main():
     pass

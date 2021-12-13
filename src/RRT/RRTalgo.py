@@ -1,6 +1,8 @@
 import obstacles
 import vehicle_class
+
 import numpy as np
+from typing import Tuple, List
 
 
 def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, float]]) -> bool:

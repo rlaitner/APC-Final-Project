@@ -7,7 +7,7 @@ Classes:
 from warnings import warn
 import typing
 
-from pathingSim.Obstacle import Obstacle
+from obstacle_class.obstacle import Obstacle
 
 
 class Environment:

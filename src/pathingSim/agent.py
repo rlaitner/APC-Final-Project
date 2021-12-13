@@ -34,6 +34,8 @@ class Agent():
     trajectory: np.ndarray[np.ndarray[float, ...], np.ndarray[float, ...]]
         Holds the current path that has been traveled by the robot as a
         list of coordinates in x and y.
+    goal: np.ndarray[float, float]
+        List of the (x,y) position of the current pathing goal
 
     Methods
     -------
@@ -77,8 +79,8 @@ class Agent():
 
         # Configure vehicle
         self.pos: np.ndarray[float, float] = np.asarray(algo_data["origin"])
-        goal = np.asarray(algo_data["goal"])
-        self.heading: float = self.get_angle(goal)
+        self.goal: np.ndarray[float, float] = np.asarray(algo_data["goal"])
+        self.heading: float = self.get_angle(self.goal)
 
         self.trajectory = np.transpose(self.pos)
 

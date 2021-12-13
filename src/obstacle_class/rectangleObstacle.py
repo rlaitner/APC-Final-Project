@@ -3,6 +3,7 @@ rectangleObstacle subclass
 
 '''
 from obstacle_class.Obstacle import Obstacle
+from matplotlib import patches as patches
 
 
 class rectangleObstacle(Obstacle):

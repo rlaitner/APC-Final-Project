@@ -3,6 +3,7 @@ circleObstacle subclass
 
 '''
 from obstacle_class.Obstacle import Obstacle
+from matplotlib import patches as patches
 
 class circleObstacle(Obstacle):
 

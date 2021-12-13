@@ -10,7 +10,7 @@ from abc import ABC, abstractmethod
 from typing import Dict, List, Union, Tuple, Type
 import numpy as np
 
-from pathingSim.Environment import Environment
+from pathingSim.environment import Environment
 
 
 class PathingAlgorithm(ABC):

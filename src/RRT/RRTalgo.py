@@ -9,7 +9,7 @@ def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, flo
 
     """
     Check to see if a configuration is in the free space.
-    
+
     This function checks if the configuration q lies outside of all the obstacles in the connfiguration space.
 
     @param q: An np.ndarray describing a shape representing a random po
@@ -79,18 +79,20 @@ def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, flo
 
             inside = (side_1 < 0.0) == (side_2 < 0.0) == (side_3 < 0.0)
 
-            if inside == True:
+            if inside is True:
                 return False
-        
+
     return True
+
 
 # Given three collinear points p, q, r, the function checks if
 # point q lies on line segment 'pr'
 def onSegment(p, q, r):
-    if ( (q.x <= max(p.x, r.x)) and (q.x >= min(p.x, r.x)) and
+    if ((q.x <= max(p.x, r.x)) and (q.x >= min(p.x, r.x)) and
             (q.y <= max(p.y, r.y)) and (q.y >= min(p.y, r.y))):
         return True
     return False
+
 
 def orientation(p, q, r):
     # To find the orientation of an ordered triplet (p,q,r)
@@ -98,25 +100,26 @@ def orientation(p, q, r):
     # 0 : Collinear points
     # 1 : Clockwise points
     # 2 : Counterclockwise
-    
+
     val = (float(q.y - p.y) * (r.x - q.x)) - (float(q.x - p.x) * (r.y - q.y))
     if (val > 0):
-        
+
         # Clockwise orientation
         return 1
     elif (val < 0):
-        
+
         # Counterclockwise orientation
         return 2
     else:
-        
+
         # Collinear orientation
         return 0
 
+
 # The main function that returns true if
 # the line segment 'p1q1' and 'p2q2' intersect.
-def doIntersect(p1,q1,p2,q2):
-    
+def doIntersect(p1, q1, p2, q2):
+
     # Find the 4 orientations required for
     # the general and special cases
     o1 = orientation(p1, q1, p2)
@@ -126,8 +129,8 @@ def doIntersect(p1,q1,p2,q2):
 
     # General case
     if ((o1 != o2) and (o3 != o4)):
-        return True   
-    
+        return True
+
     # Special Cases
 
     # p1 , q1 and p2 are collinear and p2 lies on segment p1q1
@@ -148,7 +151,8 @@ def doIntersect(p1,q1,p2,q2):
 
     # If none of the cases
     return False
-    
+
+
 def edge_free(edge: Tuple[np.ndarray, np.ndarray], obstacles: List[Tuple[np.ndarray, float]]) -> bool:
     """
     Check if a graph edge is in the free space.
@@ -158,7 +162,7 @@ def edge_free(edge: Tuple[np.ndarray, np.ndarray], obstacles: List[Tuple[np.ndar
 
     @param edge: A tuple containing the two segment endpoints.
     @param obstacles: A list of obstacles as described.
-    @return: True if the edge is in the free space, i.e. it lies entirely outside of all the obstacles in `obstacles`. 
+    @return: True if the edge is in the free space, i.e. it lies entirely outside of all the obstacles in `obstacles`.
                 Otherwise return False.
     """
 
@@ -170,110 +174,114 @@ def edge_free(edge: Tuple[np.ndarray, np.ndarray], obstacles: List[Tuple[np.ndar
 
     for i in range(0, len(obstacles)):
         curr_obstacle = obstacles[i]
-        
+
         # If the obstacle is a circle
         if len(curr_obstacle) == 2:
-            
-            # Store circle center (x,y) value 
-            c = curr_obstacle[0]    
-            # Store circle radius 
+
+            # Store circle center (x,y) value
+            c = curr_obstacle[0]
+            # Store circle radius
             r = curr_obstacle[1]
-        
+
             # Solve for nabla
             nabla = (np.dot(u_norm, (o - c)))**2 - (np.dot(o - c, o - c) - r ** 2)
-        
+
             if (nabla >= 0):
                 return False
-        
+
         # Obstacle is either a rectangle or a triangle
         else:
-            
-            # Iterates through all lines of each polygon 
+
+            # Iterates through all lines of each polygon
             for k in obstacles[i].lines:
                 new_p2 = obstacles[i].lines[k][0]
                 new_q2 = obstacles[i].lines[k][1]
-                
+
                 if doIntersect(o, f, new_p2, new_q2):
                     return False
-        
+
     return True
+
 
 def random_conf(width: float, height: float) -> np.ndarray:
     """
     Sample a random configuration from the configuration space.
-    
-    This function draws a uniformly random configuration from the configuration space rectangle. The configuration 
+
+    This function draws a uniformly random configuration from the configuration space rectangle. The configuration
     does not necessarily have to reside in the free space.
-    
+
     @param width: The configuration space width.
     @param height: The configuration space height.
     @return: A random configuration uniformily distributed across the configuration space.
     """
-    
-    # Randomly sample x and y values 
+
+    # Randomly sample x and y values
     x_val = width * np.random.rand()
     y_val = height * np.random.rand()
-    
+
     conf = np.zeros(2)
     conf[0] = x_val
     conf[1] = y_val
 
     return conf
 
+
 def random_free_conf(width: float, height: float, obstacles: List[Tuple[np.ndarray, float]]) -> np.ndarray:
     """
     Sample a random configuration from the free space.
-    
+
     This function draws a uniformly random configuration from the configuration space
     rectangle that lies in the free space.
-    
+
     @param width: The configuration space width.
     @param height: The configuration space height.
     @param obstacles: The list of configuration space obstacles as defined in `edge_free` and `conf_free`.
     @return: A random configuration uniformily distributed across the configuration space.
-    
+
     """
-    
-    # Check if in free space 
-    free_flag = True 
+
+    # Check if in free space
+    free_flag = True
     while free_flag:
-        
+
         new_conf = random_conf(width, height)
         free = conf_free(new_conf, obstacles)
-        
+
         if free:
             free_flag = False
             conf_result = new_conf
-            
+
     return conf_result
+
 
 def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
     """
     Finds the nearest vertex to conf in the set of vertices.
-    
-    This function searches through the set of vertices and finds the one that is closest to 
+
+    This function searches through the set of vertices and finds the one that is closest to
     conf using the L2 norm (Euclidean distance).
-    
+
     @param conf: The configuration we are trying to find the closest vertex to.
     @param vertices: The set of vertices represented as an np.array with shape (n, 2). Each row represents
                      a vertex.
     @return: The index (i.e. row of `vertices`) of the vertex that is closest to `conf`.
-    
+
     """
-    
+
     min_dist = np.Inf
-    
+
     # Calc Euclidean distance and store min
     for i in range(0, vertices.shape[0]):
         dist = np.sqrt((conf[0]-vertices[i][0])**2 + (conf[1] - vertices[i][1])**2)
-        
+
         if (dist < min):
-            min_dist = dist 
+            min_dist = dist
             index = i
-    
+
     return index
 
     # Need to add extend() function
+
 
 def edges_of(vertices):
     """
@@ -285,10 +293,11 @@ def edges_of(vertices):
     N = len(vertices)
 
     for i in range(N):
-        edge = vertices[(i + 1)%N] - vertices[i]
+        edge = vertices[(i + 1) % N] - vertices[i]
         edges.append(edge)
 
     return edges
+
 
 def orthogonal(v):
     """
@@ -326,7 +335,7 @@ def is_separating_axis(o, p1, p2):
         return False, pv
     else:
         return True, None
-    
+
 
 def polygonCollide(p1, p2):
     '''
@@ -355,11 +364,11 @@ def polygonCollide(p1, p2):
             push_vectors.append(pv)
 
     # they do collide and the push_vector with the smallest length is the MPV
-    mpv =  min(push_vectors, key=(lambda v: np.dot(v, v)))
+    mpv = min(push_vectors, key=(lambda v: np.dot(v, v)))
 
     # assert mpv pushes p1 away from p2
-    d = centers_displacement(p1, p2) # direction from p1 to p2
-    if np.dot(d, mpv) > 0: # if it's the same direction, then invert
+    d = centers_displacement(p1, p2)  # direction from p1 to p2
+    if np.dot(d, mpv) > 0:  # if it's the same direction, then invert
         mpv = -mpv
 
     return True, mpv

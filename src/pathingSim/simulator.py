@@ -5,11 +5,12 @@ Classes
 -------
 Simulator
 """
-from pathlib import Path
 import json
+import sys
+import numpy as np
+from pathlib import Path
 from typing import Union
 from matplotlib import pyplot as plt
-import numpy as np
 
 from pathingSim.visualizer import Visualizer
 from pathingSim.environment import Environment
@@ -77,14 +78,17 @@ class Simulator():
         # can it get to the goal set?
         for step in steps:
             time += step
-            self._robot.step_toward_goal()
+            try:
+                self._robot.step_toward_goal()
+            except Exception as e:
+                raise RuntimeError(f"Simulation failed with error {e}.")
             if self._is_in_goal():
                 print(f"The simulation converged in {time}.")
                 return True
 
         return False
 
-    def animate(self, file_name:Union[str, None] = None) -> None:
+    def animate(self, file_name: Union[str, None] = None) -> None:
         fig, ax = self._illustrator.render_environment()
         ani = self._illustrator.render_path(fig, ax, self._robot.trajectory)
 
@@ -97,7 +101,17 @@ class Simulator():
 
 
 def main():
-    pass
+    try:
+        JSON_file = sys.argv[1]
+    except IndexError:
+        raise ValueError("Please provide a valid config file path.")
+
+    sim = Simulator(JSON_file)
+
+    if sim.run():
+        sim.animate()
+    else:
+        print("Simulation failed to converge.")
 
 if __name__ == "main":
     main()

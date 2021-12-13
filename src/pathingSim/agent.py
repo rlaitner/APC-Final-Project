@@ -17,7 +17,7 @@ from pathingSim.Environment import Environment
 
 class Agent():
     """
-    This class uses physical models and path planning algorithms to 
+    This class uses physical models and path planning algorithms to
     generate valid tractories for a given system to follow.
 
     Attributes
@@ -31,6 +31,9 @@ class Agent():
     vehicle: Vehicle
         Contains a vehicle class that defines the robot dynamically and
         provides an illustrator for visualization
+    trajectory: np.ndarray[np.ndarray[float, ...], np.ndarray[float, ...]]
+        Holds the current path that has been traveled by the robot as a
+        list of coordinates in x and y.
 
     Methods
     -------
@@ -77,7 +80,7 @@ class Agent():
         goal = np.asarray(algo_data["goal"])
         self.heading: float = self.get_angle(goal)
 
-        self.trajectory = self.pos
+        self.trajectory = np.transpose(self.pos)
 
     def get_angle(self, point: np.ndarray[float, float]) -> float:
         """
@@ -124,5 +127,5 @@ class Agent():
         self.pos = self.vehicle.update(pathx[0], pathy[0], angle)
 
         # Move to the first point
-        self.trajectory = np.append(self.trajectory, self.pos)
+        self.trajectory = np.append(self.trajectory, np.transpose(self.pos))
         self.heading = angle

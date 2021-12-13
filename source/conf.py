@@ -63,6 +63,12 @@ latex_elements = {
 	'sphinxsetup': 'hmargin={1in,1.5in}, vmargin={1.5in,1in}, marginpar=1in',	
 }
 
+# Grouping the document tree into LaTeX files 
+# latex_documents = {
+# 	("index", etc.),
+#
+# }
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']

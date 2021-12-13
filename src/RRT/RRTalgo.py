@@ -10,7 +10,7 @@ def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, flo
     
     This function checks if the configuration q lies outside of all the obstacles in the connfiguration space.
     
-    @param q: An np.ndarray describing a shape representing a random point
+    @param q: An np.ndarray describing a shape representing a random po
     @param obstacles: A list of obstacles. A circle obstacle is a tuple of the form (center, radius) representing a circle,
     a rectangle obstacle is a tuple of the form (center, length, width), and a triangle obstacle is a tuple of the 
     form (vertices).
@@ -68,10 +68,10 @@ def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, flo
             
             # Line 1
             side_1 = (x - bx) * (ay - by) - (ax - bx) * (y - by)
-            
             # Line 2
+            
             side_2 = (x - cx) * (by - cy) - (bx - cx) * (y - cy)
-
+            
             # Line 3
             side_3 = (x - ax) * (cy - ay) - (cx - ax) * (y - ay)
             
@@ -80,4 +80,4 @@ def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, flo
             if inside == True:
                 return False
         
-    return True 
+    return True

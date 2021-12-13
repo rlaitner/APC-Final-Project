@@ -14,3 +14,8 @@ class circleObstacle(Obstacle):
         self.shape = "circle"
         # Radius of circle object
         self.radius = radius
+
+    def render_obstacle(self):
+        x,y = (self.position[0], self.position[1])
+        circle = patches.Circle((x, y), self.radius)
+        return circle

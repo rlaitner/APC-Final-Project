@@ -17,10 +17,21 @@ class rectangleObstacle(Obstacle):
         self.length = length
         # Width of rectangle object
         self.width = width
+
+
+        # Vertices that form the rectangle
+        self.vertices = [[position[0], position[1]],
+                        [position[0], position[1] + length],
+                        [position[0] + width, position[1] + length],
+                        [position[0] + width, position[1]]]
         # Lines that form the rectangle
         self.lines = [[(position[0], position[1]), (position[0] + width, position[1])],
                       [(position[0], position[1]), (position[0], position[1] + length)],
                       [(position[0], position[1] + length), (position[0] + width, position[1] + length)],
                       [(position[0] + width, position[1]), (position[0] + width, position[1] + length)]]
 
-        
+    def render_obstacle(self):
+        x,y = (self.position[0], self.position[1])
+        rectangle = patches.Rectangle((x, y), self.width, self.length)
+        return rectangle
+            

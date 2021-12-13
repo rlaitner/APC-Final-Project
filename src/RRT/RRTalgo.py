@@ -244,3 +244,29 @@ def random_free_conf(width: float, height: float, obstacles: List[Tuple[np.ndarr
             conf_result = new_conf
             
     return conf_result
+
+    def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
+    """
+    Finds the nearest vertex to conf in the set of vertices.
+    
+    This function searches through the set of vertices and finds the one that is closest to 
+    conf using the L2 norm (Euclidean distance).
+    
+    @param conf: The configuration we are trying to find the closest vertex to.
+    @param vertices: The set of vertices represented as an np.array with shape (n, 2). Each row represents
+                     a vertex.
+    @return: The index (i.e. row of `vertices`) of the vertex that is closest to `conf`.
+    
+    """
+    
+    min_dist = np.Inf
+    
+    # Calc Euclidean distance and store min
+    for i in range(0, vertices.shape[0]):
+        dist = np.sqrt((conf[0]-vertices[i][0])**2 + (conf[1] - vertices[i][1])**2)
+        
+        if (dist < min):
+            min_dist = dist 
+            index = i
+    
+    return index

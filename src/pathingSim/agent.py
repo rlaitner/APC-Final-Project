@@ -17,8 +17,8 @@ from pathingSim.Environment import Environment
 
 class Agent():
     """
-    This class uses physical models and path planning algorithms to generate
-    valid tractories for a given system to follow.
+    This class uses physical models and path planning algorithms to
+    generate valid tractories for a given system to follow.
 
     Attributes
     ----------
@@ -28,6 +28,14 @@ class Agent():
         The angle in radians of the front of the robot. This value is
         initialized so that the the robot starts pointing towards the
         goal.
+    vehicle: Vehicle
+        Contains a vehicle class that defines the robot dynamically and
+        provides an illustrator for visualization
+    trajectory: np.ndarray[np.ndarray[float, ...], np.ndarray[float, ...]]
+        Holds the current path that has been traveled by the robot as a
+        list of coordinates in x and y.
+    goal: np.ndarray[float, float]
+        List of the (x,y) position of the current pathing goal
 
     Methods
     -------
@@ -63,18 +71,18 @@ class Agent():
         """
         # Instantiate objects
         self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"])
-        self._vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
+        self.vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
 
         # Configure objects
         self._planner.set_config(algo_data, setting)
-        self._vehicle.set_config(vehicle_data)
+        self.vehicle.set_config(vehicle_data)
 
         # Configure vehicle
         self.pos: np.ndarray[float, float] = np.asarray(algo_data["origin"])
-        goal = np.asarray(algo_data["goal"])
-        self.heading: float = self.get_angle(goal)
+        self.goal: np.ndarray[float, float] = np.asarray(algo_data["goal"])
+        self.heading: float = self.get_angle(self.goal)
 
-        self.trajectory = self.pos
+        self.trajectory = np.transpose(self.pos)
 
     def get_angle(self, point: np.ndarray[float, float]) -> float:
         """
@@ -118,8 +126,8 @@ class Agent():
 
         # Check that the finite time horizon is dynamically-viable
         angle = self.get_angle(np.array([pathx[0], pathy[0]]))
-        self.pos = self._vehicle.update(pathx[0], pathy[0], angle)
+        self.pos = self.vehicle.update(pathx[0], pathy[0], angle)
 
         # Move to the first point
-        self.trajectory = np.append(self.trajectory, self.pos)
+        self.trajectory = np.append(self.trajectory, np.transpose(self.pos))
         self.heading = angle

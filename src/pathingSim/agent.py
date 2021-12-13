@@ -10,9 +10,9 @@ from typing import Dict, Union
 import numpy as np
 
 from pathingSim.pathing_algorithm import PathingAlgorithm
-from pathingSim.vehicle import Vehicle
+from vehicle_class.vehicle import Vehicle
 from pathingSim.algo_factory import algo_factory
-from pathingSim.Environment import Environment
+from pathingSim.environment import Environment
 
 
 class Agent():

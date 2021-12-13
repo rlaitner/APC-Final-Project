@@ -21,4 +21,11 @@ class UAV(Vehicle):
         UAV_position = [x, y]
         
         return UAV_position         
+
+    def render_vehicle(self, position):
+        x,y = (position[0], position[1])
+        drone = patches.Circle((x, y), self.size)
+
+        return drone
+                           
     

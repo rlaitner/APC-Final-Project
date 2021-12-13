@@ -38,6 +38,7 @@ class Car(Vehicle):
 
         return car_position
 
+
     def render_vehicle(self, position):
         def calc_origin(d, position):
             psi = np.pi/4 - position[2]

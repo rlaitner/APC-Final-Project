@@ -14,6 +14,7 @@ class Tricycle(Vehicle):
         self.theta_init = init_position[2]
         self.shape = "rectangle"
         
+        
     def update_dynamics(self, x, y, theta, turn_angle, u=1, dt=0.1):
                 
         L = self.size[0]        
@@ -29,6 +30,7 @@ class Tricycle(Vehicle):
 
         return tricycle_position     
     
+
     def render_vehicle(self, position):
     
         def calc_origin(d, position):

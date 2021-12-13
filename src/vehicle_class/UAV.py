@@ -1,5 +1,7 @@
 from vehicle_class.vehicle import Vehicle
 
+from matplotlib import patches as patches
+
 
 class UAV(Vehicle):
 

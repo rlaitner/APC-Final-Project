@@ -1,5 +1,7 @@
 from vehicle_class.vehicle import Vehicle
+
 import numpy as np
+from matplotlib import patches as patches
 
 
 class Car(Vehicle):

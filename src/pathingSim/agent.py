@@ -17,8 +17,8 @@ from pathingSim.Environment import Environment
 
 class Agent():
     """
-    This class uses physical models and path planning algorithms to generate
-    valid tractories for a given system to follow.
+    This class uses physical models and path planning algorithms to 
+    generate valid tractories for a given system to follow.
 
     Attributes
     ----------
@@ -28,6 +28,9 @@ class Agent():
         The angle in radians of the front of the robot. This value is
         initialized so that the the robot starts pointing towards the
         goal.
+    vehicle: Vehicle
+        Contains a vehicle class that defines the robot dynamically and
+        provides an illustrator for visualization
 
     Methods
     -------
@@ -63,11 +66,11 @@ class Agent():
         """
         # Instantiate objects
         self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"])
-        self._vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
+        self.vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
 
         # Configure objects
         self._planner.set_config(algo_data, setting)
-        self._vehicle.set_config(vehicle_data)
+        self.vehicle.set_config(vehicle_data)
 
         # Configure vehicle
         self.pos: np.ndarray[float, float] = np.asarray(algo_data["origin"])
@@ -118,7 +121,7 @@ class Agent():
 
         # Check that the finite time horizon is dynamically-viable
         angle = self.get_angle(np.array([pathx[0], pathy[0]]))
-        self.pos = self._vehicle.update(pathx[0], pathy[0], angle)
+        self.pos = self.vehicle.update(pathx[0], pathy[0], angle)
 
         # Move to the first point
         self.trajectory = np.append(self.trajectory, self.pos)

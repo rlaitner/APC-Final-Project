@@ -3,13 +3,30 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to APC 524 Final Project: Path Finding Algorithm Solver's documentation!
+Path Finding Algorithm Solver Documentation
 ================================================================================
 
-Description
+About
 ___________
 
-Path-planning algorithms are critical when it comes to deploying autonomous vehicles
+Within this project, we hope to be able to build a software package that enables
+usersto explore the tradeoffs of utilizing different path-planning algorithms
+with different vehicles in both static and dynamic environments. Currently we will
+be utilizing A*, Djikstra's, and RRTs as each of these algortihms have their own
+pros and cons. 
+
+
+Overview of Our System's Functionality
+________________________________________________________________________________
+
+The system will include the following options: 
+
+* Type of Path-Finding Algorithm
+* Type of Obstacles 
+* Dynamic/Static Obstacles 
+* Type of Vehicle (UAV or Car) 
+
+
 
 
 Notes
@@ -25,10 +42,16 @@ _______
    :maxdepth: 2
    :caption: Contents:
 
-   modules 
+   pathing_algo
+   environment
+   obstacles
+   vehicle
+   visualizer
+   simulator
+   
 
 Indices and tables
-==================
+^^^^^^^^^^^^^^^^^^
 
 * :ref:`genindex`
 * :ref:`modindex`

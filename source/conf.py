@@ -18,8 +18,8 @@ sys.path.insert(0, os.path.abspath('./source'))
 # -- Project information -----------------------------------------------------
 
 project = 'APC 524 Final Project: Path Finding Algorithm Solver'
-copyright = '2021 Princeton Universityg'
-author = 'Kevin Andrade, Benjamin Laitner, Lap Hei Lam, Salman Sarwar, Michelle Zhang'
+copyright = '2021 Princeton University'
+author = 'K. Andrade, R. Laitner, L.H. Lam, S. Sarwar, M. Zhang'
 
 # The full version, including alpha/beta/rc tags
 release = '1.0'
@@ -37,7 +37,7 @@ extensions = [
     'sphinx.ext.imgmath',
 ]
 
-# Napoleon Settings
+# -- Napoleon Settings --------------------------------------------------------
 # See sphinx-doc.org/en/master/usage/extensions/napoleon.html#module-sphinx.ext.napoleon
 # For settings and explanations
 
@@ -55,6 +55,14 @@ napoleon_use_rtype = True
 napoleon_preprocess_types = False
 napoleon_type_aliases = None
 napoleon_attr_annotations = True
+
+# -- LaTeX Customization -------------------------------------------------------
+
+latex_engine = 'pdflatex'
+latex_elements = {
+	'sphinxsetup': 'hmargin={1in,1.5in}, vmargin={1.5in,1in}, marginpar=1in',	
+}
+
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -84,8 +92,16 @@ def setup(app):
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
-#
+
 html_theme = 'alabaster'
+
+html_theme_options = {
+	'description': 'Final Project for APC 524',
+	'github_user': 'rlaitner',
+	'github_repo': 'APC-Final-Project',
+	}
+	
+
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

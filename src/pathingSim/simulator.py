@@ -51,10 +51,7 @@ class Simulator():
         diff = self._robot.pos - self._robot.goal
         circle = np.sum(diff * diff)
 
-        if circle <= self.radius * self.radius:
-            return True
-        else:
-            return False
+        return bool(circle <= self.radius * self.radius)
 
     def run(self) -> bool:
         """Simulates the world for a predetermined amount of time"""
@@ -64,8 +61,8 @@ class Simulator():
         # is it initially in the goal set?
         time = 0
         if self._is_in_goal():
-                print(f"The simulation converged in {time}.")
-                return True
+            print(f"The simulation converged in {time}.")
+            return True
         # can it get to the goal set?
         for step in steps:
             time += step

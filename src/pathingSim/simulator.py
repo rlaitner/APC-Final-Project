@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import Union
 from matplotlib import pyplot as plt
 
-from pathingSim.visualizer import Visualizer
+from visualizer_class.visualizer import Visualizer
 from pathingSim.environment import Environment
 from pathingSim.agent import Agent
 

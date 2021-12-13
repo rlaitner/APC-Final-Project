@@ -195,3 +195,52 @@ def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, flo
                     return False
         
     return True
+
+    def random_conf(width: float, height: float) -> np.ndarray:
+    """
+    Sample a random configuration from the configuration space.
+    
+    This function draws a uniformly random configuration from the configuration space rectangle. The configuration 
+    does not necessarily have to reside in the free space.
+    
+    @param width: The configuration space width.
+    @param height: The configuration space height.
+    @return: A random configuration uniformily distributed across the configuration space.
+    """
+    
+    # Randomly sample x and y values 
+    x_val = width * np.random.rand()
+    y_val = height * np.random.rand()
+    
+    conf = np.zeros(2)
+    conf[0] = x_val
+    conf[1] = y_val
+
+    return conf
+
+def random_free_conf(width: float, height: float, obstacles: List[Tuple[np.ndarray, float]]) -> np.ndarray:
+    """
+    Sample a random configuration from the free space.
+    
+    This function draws a uniformly random configuration from the configuration space
+    rectangle that lies in the free space.
+    
+    @param width: The configuration space width.
+    @param height: The configuration space height.
+    @param obstacles: The list of configuration space obstacles as defined in `edge_free` and `conf_free`.
+    @return: A random configuration uniformily distributed across the configuration space.
+    
+    """
+    
+    # Check if in free space 
+    free_flag = True 
+    while free_flag:
+        
+        new_conf = random_conf(width, height)
+        free = conf_free(new_conf, obstacles)
+        
+        if free:
+            free_flag = False
+            conf_result = new_conf
+            
+    return conf_result

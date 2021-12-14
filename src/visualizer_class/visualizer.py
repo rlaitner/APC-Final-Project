@@ -39,6 +39,7 @@ class Visualizer():
             ax.add_patch(vehicle_shape)
             return vehicle_shape,
         
+        
         vehicle_shape = self.vehicle.render_vehicle(path[0])
         ax.add_patch(vehicle_shape)
         anim = animation.FuncAnimation(fig, animate,

@@ -46,6 +46,7 @@ __________
    :caption: Contents:
 
    test
+   background_science
    installation_setup
    interface
    environment

@@ -49,11 +49,11 @@ __________
    background_science
    installation_setup
    interface
-   environment
+   algorithms
    obstacles
-   vehicle
+   vehicles
+   pathing_sim
    visualizer
-   simulator
    using_sphinx
    Github <https://github.com/rlaitner/APC-Final-Project>
    

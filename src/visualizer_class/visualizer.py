@@ -1,6 +1,10 @@
 from matplotlib import pyplot as plt
 from matplotlib import animation
 from matplotlib import patches as patches
+from obstacle import Obstacle, circleObstacle, triangleObstacle, rectangleObstacle
+from vehicle import Vehicle, Car, UAV, Tricycle
+
+import numpy as np
 
 
 class Visualizer():
@@ -10,33 +14,37 @@ class Visualizer():
         #self.obstacles = environment.obstacles 
         self.vehicle_shape = vehicle.type
         self.vehicle = vehicle
-        self.fig, self.ax = plt.subplots()
         
     def render_environment(self):
-        self.ax.set_xlim(0,self.x)
-        self.ax.set_ylim(0,self.y)
+        fig, ax = plt.subplots()
+        ax.set_xlim(0,self.x)
+        ax.set_ylim(0,self.y)
         
         for obstacle in self.obstacles:
-            self.ax.add_patch(obstacle.render_obstacle())
-          
-    def render_path(self,path):
+            ax.add_patch(obstacle.render_obstacle())
+        return (fig, ax) 
+    
+    
+    def render_path(self, path, fig, ax):
         
         def start():
-            vehicle_shape.center = (vehicle.init_pos[0], vehicle.init_pos[1])
-            self.ax.add_patch(vehicle_shape)
-            return vehicle_shape
+            vehicle_shape.center = (vehicle.x_init, vehicle.y_init)
+            ax.add_patch(vehicle_shape)
+            ax.patches.pop()
+            return vehicle_shape,
         
-        def animate(step):
-            vehicle_shape = self.vehicle.render_vehicle(path[step])
-            x = path[step][0]
-            y = path[step][1]   
-            vehicle_shape.center = (x, y)
-            return vehicle_shape
+        def animate(i):
+            ax.patches.pop()
+            vehicle_shape = vehicle.render_vehicle(path[i])
+            ax.add_patch(vehicle_shape)
+            return vehicle_shape,
         
         
+        print(ax.patches)
         vehicle_shape = self.vehicle.render_vehicle(path[0])
-        self.ax.add_patch(vehicle_shape)
-        self.anim = animation.FuncAnimation(self.fig, animate,
+        ax.add_patch(vehicle_shape)
+        anim = animation.FuncAnimation(fig, animate,
                                frames=1000, init_func = start,
                                interval=50, repeat = True,
                                blit=True)
+        return anim

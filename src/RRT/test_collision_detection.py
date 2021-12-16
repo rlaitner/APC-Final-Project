@@ -49,7 +49,7 @@ def test_not_colliding_rectangle_polygon_collide(rectangleObject1, rectangleObje
 def test_colliding_triangle_polygon_collide(triangleObject1, triangleObject2):
     assert polygon_collide(triangleObject1, triangleObject2) == True
 
-# Test if two triangles that should noot collide will indeed not collide
+# Test if two triangles that should not collide will indeed not collide
 def test_not_colliding_triangle_polygon_collide(triangleObject1, triangleObject3):
     assert polygon_collide(triangleObject1, triangleObject3) == False
 

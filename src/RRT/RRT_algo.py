@@ -1,7 +1,7 @@
 import obstacles
 import vehicle_class
 import collision_detection
-import numpy as np    
+import numpy as np
 
 def free_conf(q: Tuple[np.ndarray, float], obstacles: List[Tuple[np.ndarray, float]]) -> bool:
 
@@ -272,4 +272,3 @@ def random_free_conf(width: float, height: float, obstacles: List[Tuple[np.ndarr
     return index
 
     # Need to add extend() function
-    

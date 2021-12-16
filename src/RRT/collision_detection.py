@@ -1,3 +1,5 @@
+import numpy as np 
+
 def edges_of(vertices):
     """
     Return the vectors for the edges of the polygon p.
@@ -57,17 +59,16 @@ def centers_displacement(p1, p2):
     return c2 - c1
     
 
-def polygonCollide(p1, p2):
+def polygon_collide(p1, p2):
     '''
-    Return True and the MPV if the shapes collide. Otherwise, return False and
-    None.
+    Return True if the shapes collide. Otherwise, return False.
 
     p1 and p2 are lists of ordered pairs, the vertices of the polygons in the
     counterclockwise direction.
     '''
 
-    p1 = [np.array(v, 'float64') for v in p1]
-    p2 = [np.array(v, 'float64') for v in p2]
+    p1 = [np.array(v) for v in p1]
+    p2 = [np.array(v) for v in p2]
 
     edges = edges_of(p1)
     edges += edges_of(p2)
@@ -75,12 +76,10 @@ def polygonCollide(p1, p2):
 
     push_vectors = []
     for o in orthogonals:
-        separates, pv = is_separating_axis(o, p1, p2)
+        separates = is_separating_axis(o, p1, p2)
 
         if separates:
-            # They do not collide and there is no push vector
-            return False, None
-        else:
-            push_vectors.append(pv)
+            # They do not collide
+            return False
 
     return True

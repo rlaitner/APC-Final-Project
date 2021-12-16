@@ -42,9 +42,7 @@ def is_separating_axis(o, p1, p2):
 
     if max1 >= min2 and max2 >= min1:
         d = min(max2 - min1, max1 - min2)
-        # Push a bit more than needed so the shapes do not overlap in future
-        # tests due to float precision
-        d_over_o_squared = d/np.dot(o, o) + 1e-10
+        
         return False
     else:
         return True

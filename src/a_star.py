@@ -1,3 +1,8 @@
+import numpy as np
+import obstacles
+import vehicle_class
+
+
 def mesh(x_env, y_env, grid_spacing, obstacles: List[Tuple[np.ndarray, float]]):
     """ Discretize the environment """
 
@@ -68,7 +73,6 @@ return grid
 
 class Vertex():
     """A class for vertices"""
-
     def __init__(self, parent=None, position=None):
         self.parent = parent  # Keeps track of parent of a vertex
         self.position = position  # Keeps track of position of a vertex
@@ -110,7 +114,6 @@ def getNeighbors(x_vertex, maze):
 ############################################################################################################
 
 
-################ TO DO: FILL THIS IN #####################################################
 def GetBestVertex(Q):
     """Get the vertex "x_vertex" in Q that has the lowest value of F"""
     """Returns x_vertex and the index of x_vertex in Q"""
@@ -239,7 +242,7 @@ print(path)
 ############################################################################################
 
 
-# This cell visualizes the path you found above
+# Visualization
 %matplotlib inline
 import matplotlib.pyplot as plt
 import numpy as np

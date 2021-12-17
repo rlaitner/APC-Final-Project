@@ -6,7 +6,7 @@ from obstacle_class.obstacle import Obstacle
 from matplotlib import patches as patches
 
 class circleObstacle(Obstacle):
-
+    
     # Class for circle obstacles    
     def __init__(self, position, radius):
         

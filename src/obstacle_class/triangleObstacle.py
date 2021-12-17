@@ -7,7 +7,7 @@ from matplotlib import patches as patches
 
     
 class triangleObstacle(Obstacle):
-
+    
     # Class for triangle obstacles
     def __init__(self, position):
         

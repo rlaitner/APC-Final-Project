@@ -5,6 +5,7 @@ rectangleObstacle subclass
 from obstacle_class.obstacle import Obstacle
 from matplotlib import patches as patches
 
+
 class rectangleObstacle(Obstacle):
     
     # Class for rectangle obstacles

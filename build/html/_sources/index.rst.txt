@@ -53,6 +53,8 @@ __________
    obstacles
    vehicles
    pathing_sim
+   pathingSim
+   modules
    visualizer
    using_sphinx
    Github <https://github.com/rlaitner/APC-Final-Project>

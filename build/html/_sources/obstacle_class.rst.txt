@@ -1,0 +1,45 @@
+obstacle\_class package
+=======================
+
+Submodules
+----------
+
+obstacle\_class.circleObstacle module
+-------------------------------------
+
+.. automodule:: obstacle_class.circleObstacle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+obstacle\_class.obstacle module
+-------------------------------
+
+.. automodule:: obstacle_class.obstacle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+obstacle\_class.rectangleObstacle module
+----------------------------------------
+
+.. automodule:: obstacle_class.rectangleObstacle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+obstacle\_class.triangleObstacle module
+---------------------------------------
+
+.. automodule:: obstacle_class.triangleObstacle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: obstacle_class
+   :members:
+   :undoc-members:
+   :show-inheritance:

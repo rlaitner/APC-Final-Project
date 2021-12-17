@@ -37,6 +37,13 @@ extensions = [
     'sphinx.ext.imgmath',
 ]
 
+# -- Intersphinx --------------------------------------------------------------
+
+intersphinx_mapping = {
+    "https://docs.python.org/3": None,
+    "https://numpy.org/doc/stable/": None,
+}
+
 # -- Napoleon Settings --------------------------------------------------------
 # See sphinx-doc.org/en/master/usage/extensions/napoleon.html#module-sphinx.ext.napoleon
 # For settings and explanations
@@ -116,3 +123,5 @@ html_static_path = ['_static']
 
 
 # -- Extension configuration -------------------------------------------------
+
+

@@ -1,0 +1,21 @@
+visualizer\_class package
+=========================
+
+Submodules
+----------
+
+visualizer\_class.visualizer module
+-----------------------------------
+
+.. automodule:: visualizer_class.visualizer
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: visualizer_class
+   :members:
+   :undoc-members:
+   :show-inheritance:

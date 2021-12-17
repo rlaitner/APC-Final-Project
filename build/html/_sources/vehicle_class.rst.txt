@@ -1,0 +1,45 @@
+vehicle\_class package
+======================
+
+Submodules
+----------
+
+vehicle\_class.UAV module
+-------------------------
+
+.. automodule:: vehicle_class.UAV
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+vehicle\_class.car module
+-------------------------
+
+.. automodule:: vehicle_class.car
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+vehicle\_class.tricycle module
+------------------------------
+
+.. automodule:: vehicle_class.tricycle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+vehicle\_class.vehicle module
+-----------------------------
+
+.. automodule:: vehicle_class.vehicle
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Module contents
+---------------
+
+.. automodule:: vehicle_class
+   :members:
+   :undoc-members:
+   :show-inheritance:

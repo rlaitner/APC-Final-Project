@@ -1,0 +1,10 @@
+\begin{sphinxtheindex}
+\let\bigletter\sphinxstyleindexlettergroup
+\let\spxpagem \sphinxstyleindexpagemain
+\let\spxentry \sphinxstyleindexentry
+\let\spxextra \sphinxstyleindexextra
+
+  \bigletter A
+  \item \spxentry{algo\_factory.py}\spxextra{built\sphinxhyphen{}in class}, \hyperpage{7}
+
+\end{sphinxtheindex}

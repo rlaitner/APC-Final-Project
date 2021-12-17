@@ -56,12 +56,12 @@
 \addto\captionsenglish{\renewcommand{\contentsname}{Contents:}}
 
 \usepackage{sphinxmessages}
-\setcounter{tocdepth}{1}
+
 
 
 
 \title{APC 524 Final Project: Path Finding Algorithm Solver}
-\date{Dec 12, 2021}
+\date{Dec 16, 2021}
 \release{1.0}
 \author{K.\@{} Andrade, R.\@{} Laitner, L.H.\@{} Lam, S.\@{} Sarwar, M.\@{} Zhang}
 \newcommand{\sphinxlogo}{\vbox{}}
@@ -82,9 +82,9 @@
 \label{\detokenize{index:about}}
 \sphinxAtStartPar
 Within this project, we hope to be able to build a software package that enables
-usersto explore the tradeoffs of utilizing different path\sphinxhyphen{}planning algorithms
+users to explore the tradeoffs of utilizing different path\sphinxhyphen{}planning algorithms
 with different vehicles in both static and dynamic environments. Currently we will
-be utilizing A*, Djikstra’s, and RRTs as each of these algortihms have their own
+be utilizing A*, Djikstra’s, and RRTs as each of these algorithms have their own
 pros and cons.
 
 
@@ -118,8 +118,289 @@ Type of Vehicle (UAV or Car)
 (To be completed…)
 
 
-\chapter{Modules}
-\label{\detokenize{index:modules}}
+\chapter{Contents}
+\label{\detokenize{index:contents}}
+
+\section{Algorithm Factory}
+\label{\detokenize{test:algorithm-factory}}\label{\detokenize{test::doc}}\index{algo\_factory.py (built\sphinxhyphen{}in class)@\spxentry{algo\_factory.py}\spxextra{built\sphinxhyphen{}in class}}
+
+\begin{fulllineitems}
+\phantomsection\label{\detokenize{test:algo_factory.py}}\pysigline{\sphinxbfcode{\sphinxupquote{class\DUrole{w}{  }}}\sphinxcode{\sphinxupquote{algo\_factory.}}\sphinxbfcode{\sphinxupquote{py}}}
+\end{fulllineitems}
+
+
+
+\bigskip\hrule\bigskip
+
+
+
+\subsection{Generates a PathingAlgorithm class to be used by higher level code.}
+\label{\detokenize{test:generates-a-pathingalgorithm-class-to-be-used-by-higher-level-code}}
+\sphinxAtStartPar
+\sphinxstylestrong{Functions:}
+Returns a PathingAlgorithm object of a specified type:
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k+kn}{from} \PYG{n+nn}{typing} \PYG{k+kn}{import} \PYG{n}{Type}\PYG{p}{,} \PYG{n}{Dict}
+
+\PYG{k+kn}{from} \PYG{n+nn}{pathingSim}\PYG{n+nn}{.}\PYG{n+nn}{pathing\PYGZus{}algorithm} \PYG{k+kn}{import} \PYG{n}{PathingAlgorithm}
+\PYG{k+kn}{from} \PYG{n+nn}{pathingSim}\PYG{n+nn}{.}\PYG{n+nn}{a\PYGZus{}star} \PYG{k+kn}{import} \PYG{n}{AStar}
+\PYG{k+kn}{from} \PYG{n+nn}{pathingSim}\PYG{n+nn}{.}\PYG{n+nn}{RRT} \PYG{k+kn}{import} \PYG{n}{RRT}
+\end{sphinxVerbatim}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{k}{def} \PYG{n+nf}{algo\PYGZus{}factory}\PYG{p}{(}\PYG{n}{chosen\PYGZus{}algo}\PYG{p}{:} \PYG{n+nb}{str}\PYG{p}{)} \PYG{o}{\PYGZhy{}}\PYG{o}{\PYGZgt{}} \PYG{n}{PathingAlgorithm}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Returns an instantiated implementation of a PathingAlgorithm object.
+
+\sphinxAtStartPar
+\sphinxstylestrong{Parameters}
+\begin{description}
+\item[{chosen\_aglo: str}] \leavevmode
+\sphinxAtStartPar
+A string that specifies the desired pathing algorithm to use.
+
+\sphinxAtStartPar
+The possible algorithms currently are:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+A*: The A* search algorithm
+
+\item {} 
+\sphinxAtStartPar
+RRT: The rapidly\sphinxhyphen{}exploring random tree algorithm
+
+\end{itemize}
+
+\end{description}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Returns}
+\begin{description}
+\item[{PathingAlgorithm}] \leavevmode
+\sphinxAtStartPar
+Implementation of pathing algorithm specified by input parameter
+
+\end{description}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Raises}
+\begin{description}
+\item[{NotImplementedError}] \leavevmode
+\sphinxAtStartPar
+Raised when a pathing algorithm is chosen that does not exist in the factor and cannot be provided
+
+\end{description}
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{n}{possible}\PYG{p}{:} \PYG{n}{Dict}\PYG{p}{[}\PYG{n+nb}{str}\PYG{p}{,} \PYG{n}{Type}\PYG{p}{[}\PYG{n}{PathingAlgorithm}\PYG{p}{]}\PYG{p}{]}
+\PYG{n}{possible} \PYG{o}{=} \PYG{p}{\PYGZob{}}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{A*}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{AStar}\PYG{p}{,}
+        \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{RRT}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{:} \PYG{n}{RRT}
+\PYG{p}{\PYGZcb{}}
+
+\PYG{k}{try}\PYG{p}{:}
+        \PYG{k}{return} \PYG{n}{possible}\PYG{p}{[}\PYG{n}{chosen\PYGZus{}algo}\PYG{p}{]}\PYG{p}{(}\PYG{p}{)}
+\PYG{k}{except} \PYG{n+ne}{KeyError}\PYG{p}{:}
+        \PYG{k}{raise} \PYG{n+ne}{NotImplementedError}\PYG{p}{(}\PYG{l+s+sa}{f}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{The specified algorithm }\PYG{l+s+si}{\PYGZob{}}\PYG{n}{chosen\PYGZus{}algo}\PYG{l+s+si}{\PYGZcb{}}\PYG{l+s+s2}{\PYGZdq{}} \PYG{o}{+}
+                                  \PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{ is invalid.}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+
+\section{Project Background}
+\label{\detokenize{background_science:project-background}}\label{\detokenize{background_science::doc}}
+
+\subsection{Introduction}
+\label{\detokenize{background_science:introduction}}
+\sphinxAtStartPar
+In recent decades, there has been a tremendous proliferation of autonomous vehicles such as self\sphinxhyphen{}driving cars and self\sphinxhyphen{}navigating drones and robots. Although there are many branches of science at work that enable these complex systems to continuously improve, one important component is the path\sphinxhyphen{}planning algorithm. Path\sphinxhyphen{}planning algorithms are critical when it comes to deploying autonomous vehicles because they enable the vehicles to be able to go from one point to another while navigating around obstacles. Such autonomous vehicles are able to leverage path\sphinxhyphen{}planning algorithms by collecting information through cameras and use the gathered information in clever ways.
+Generally, it is desired for the robot to reach a specific goal from wherever its origin point may be within a 2D or 3D space. In a realistic setting, there are often obstacles these vehicles must be able to circumvent while on their way to the destination. The existence of such obstacles makes it difficult for vehicles to go from their origin to their desired destination, thus requiring careful selection of an algorithm. Ideally, the algorithm is able to carve out a path for the vehicle to follow, spanning from its current location to its desired destination.
+In real systems, resources come at a premium. Within this project, we hope to be able to build a software package that enables users to explore the trade\sphinxhyphen{}offs of utilizing different path\sphinxhyphen{}planning algorithms with different vehicles in both static and dynamic environments. For now, we will utilize A* and RRTs given that each of these algorithms have their own pros and cons.
+
+
+\subsection{Overview of Functionality}
+\label{\detokenize{background_science:overview-of-functionality}}
+\sphinxAtStartPar
+The system will include the following options:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+Type of Path\sphinxhyphen{}Finding Algorithm
+
+\item {} 
+\sphinxAtStartPar
+Type of Obstacles
+
+\item {} 
+\sphinxAtStartPar
+Dynamic and Static Obstacles
+
+\item {} 
+\sphinxAtStartPar
+Type of Vehicle
+
+\end{itemize}
+
+
+\subsection{Path\sphinxhyphen{}Finding Algorithms}
+\label{\detokenize{background_science:path-finding-algorithms}}
+\sphinxAtStartPar
+An important aspect of this project is to provide the user with options on the kind of path\sphinxhyphen{}finding algorithm used for the given autonomous vehicle and set of obstacles. The following path\sphinxhyphen{}finding algorithms will be implemented as options to the user.
+
+
+\subsubsection{Rapidly\sphinxhyphen{}Exploring Random Tree (RRT)}
+\label{\detokenize{background_science:rapidly-exploring-random-tree-rrt}}
+\sphinxAtStartPar
+The RRT algorithm is centered around randomly sampling points. Points are randomly sampled across the map, where if they do not collide with an obstacle, then the vehicle moves towards that randomly sampled point by a determined amount. This process is done iteratively until the vehicle reaches the destination, if one exists. If a path to its destination exists, under mild assumptions, the RRT algorithm is guaranteed to find a path to it, no matter how long it takes. On the other hand, if no such path exists, the algorithm will run forever until it is forced to be terminated. One of the advantages of using this method is that it is able to operate in a continuous domain and does not require explicit prior knowledge of the environment for it to be able to navigate around the obstacles as long as some collision condition can be defined.
+
+
+\subsubsection{A* Algorithm}
+\label{\detokenize{background_science:a-algorithm}}
+\sphinxAtStartPar
+The A* algorithm is a dynamic programming graph traversal algorithm that can return the optimal path between two points in a graph with light assumptions. These assumptions are mainly made upon the choice of heuristic used to estimate the value of each location or node in a graph. In a path optimization context, A* is generally implemented by first discretizing the space in which pathing must occur and then assigning costs to each discretized point. The optimal path is then found by minimizing the overall cost between the desired start and end point. The benefit of A* search is that the optimality can be guaranteed if used correctly; however, the choice of heuristic can greatly impact both the performance, even leading to some non\sphinxhyphen{}optimal trajectories, and the time complexity of the algorithm, impact the run time from exponential to polynomial. Another downside is A* memory complexity is linear in the size of the search space which means in practice, certain iterative approximations are made to the actual algorithm for large search spaces.
+
+
+\subsubsection{Dijkstra’s Algorithm}
+\label{\detokenize{background_science:dijkstra-s-algorithm}}
+\sphinxAtStartPar
+The D* algorithm is an incremental heuristic graph search algorithm that is used to search dynamic and time\sphinxhyphen{}variant graphs. Specifically in this context, D* Lite is used to solve goal\sphinxhyphen{}directed navigation in unknown environments by repeatedly determining the shortest paths between the position of the robot and the goal as the edge costs of a graph change while the robot moves towards the goal. This algorithm, like A*, also relies on a discretized search space and can be thought of as an extension of A* with memory. This memory allows the algorithm to learn dynamic values of the individual location costs as time progresses. Because the algorithm is based upon an iterative version of A*, it can be shown for some certain choices of heuristic to be more computationally efficient than A* and better suited for dynamic environments while not being significantly more complicated to implement.
+
+
+\subsubsection{Obstacles}
+\label{\detokenize{background_science:obstacles}}
+\sphinxAtStartPar
+An important aspect of this project is to provide the user with options on the kind of shapes that are used on the description of the physical space that will be traversed.
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Quadrangle}: A quadrangular obstacle can be represented with 4 coordinate values for each of the corners of the shape.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Circle}: A circular obstacle can be represented by a pair of coordinates that represents the center of the circle and an accompanying radius value.
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Triangle}: A triangular obstacle can be represented with a pair of coordinates that represents the centroid and then three other pairs of coordinates that each represent a vertex.
+
+\end{itemize}
+
+\sphinxAtStartPar
+For our project, we are looking to give the user the option to provide both static and dynamic obstacles for which to optimize a path around.
+\begin{quote}
+
+\sphinxAtStartPar
+\sphinxstylestrong{Static Obstacles}
+
+\sphinxAtStartPar
+In the case of static obstacles, a standard algorithm is run for finding a path. This is the typical case where we have a space that contains obstacles which remain in the same location as for any given time (t).
+
+\sphinxAtStartPar
+\sphinxstylestrong{Dynamic Obstacles}
+
+\sphinxAtStartPar
+The more complex case involves using dynamic obstacles which would be considered obstacles that are actively moving over time. These would have to be specified with functions that are directly dependent on time, as this will allow us to track them while the path\sphinxhyphen{}finding algorithm is running. These trajectory functions should also be cyclical, so that they do not exit the space where the route is being calculated.
+\end{quote}
+
+
+\subsubsection{Vehicles}
+\label{\detokenize{background_science:vehicles}}
+\sphinxAtStartPar
+The type of vehicle is crucial for understanding the size of the vehicle when finding the trajectory. Since we are not considering the 3\sphinxhyphen{}D case, and are assuming identical movement possible for each vehicle type, this is simply for the purposes of determining the size of the vehicle for the appropriate path planning. The different vehicle kinds we will allow are the following:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Car}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxstylestrong{Unmanned Aerial Vehicle (UAV)}
+
+\end{itemize}
+
+
+\section{Installing the Library}
+\label{\detokenize{installation_setup:installing-the-library}}\label{\detokenize{installation_setup::doc}}
+\sphinxAtStartPar
+This library can be installed with \sphinxcode{\sphinxupquote{pip install \sphinxhyphen{}e}} from the
+top directory if it is already cloned.
+
+\sphinxAtStartPar
+You can also clone the repository using \sphinxcode{\sphinxupquote{git clone https://github.com/rlaitner/APC\sphinxhyphen{}Final\sphinxhyphen{}Project}}
+
+
+\section{Setting up the Interface}
+\label{\detokenize{interface:setting-up-the-interface}}\label{\detokenize{interface::doc}}
+
+\section{Algorithms}
+\label{\detokenize{algorithms:algorithms}}\label{\detokenize{algorithms::doc}}
+
+\subsection{RRT}
+\label{\detokenize{algorithms:rrt}}
+
+\subsection{A*}
+\label{\detokenize{algorithms:a}}
+
+\section{Obstacles}
+\label{\detokenize{obstacles:obstacles}}\label{\detokenize{obstacles::doc}}
+
+\section{Vehicles}
+\label{\detokenize{vehicles:vehicles}}\label{\detokenize{vehicles::doc}}
+
+\subsection{Car}
+\label{\detokenize{vehicles:car}}
+
+\subsection{Tricycle}
+\label{\detokenize{vehicles:tricycle}}
+
+\subsection{UAV}
+\label{\detokenize{vehicles:uav}}
+
+\section{Pathing Simulator}
+\label{\detokenize{pathing_sim:pathing-simulator}}\label{\detokenize{pathing_sim::doc}}
+
+\section{Visualizer}
+\label{\detokenize{visualizer:visualizer}}\label{\detokenize{visualizer::doc}}
+
+\section{Using Sphinx for Documentation}
+\label{\detokenize{using_sphinx:using-sphinx-for-documentation}}\label{\detokenize{using_sphinx::doc}}
+
+\subsection{Overview}
+\label{\detokenize{using_sphinx:overview}}
+\sphinxAtStartPar
+Documentation for this project can be built using \sphinxhref{sphinx-doc.org/en/master/index.html}{Sphinx}.
+
+\sphinxAtStartPar
+The files are provided in the \sphinxcode{\sphinxupquote{main/source}} directory and can build
+both html documentation and PDF files (through LaTeX).
+
+\sphinxAtStartPar
+Sphinx\sphinxhyphen{}autodoc has provided the Makefile and make.bat in the \sphinxcode{\sphinxupquote{main}}
+repository. Use the follow commands when located in \sphinxcode{\sphinxupquote{main}} for quick build:
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{make html}}
+
+\item {} 
+\sphinxAtStartPar
+\sphinxcode{\sphinxupquote{make latexpdf}}
+
+\end{itemize}
+
+\sphinxAtStartPar
+To manually build the documentation, use \sphinxcode{\sphinxupquote{sphinx\sphinxhyphen{}build}}.
+
+\sphinxAtStartPar
+See \sphinxhref{sphinx-doc.org/en/master/man/sphinx-build.html}{sphinx\sphinxhyphen{}build}
+for more detailed explanation.
+
+
+\subsection{Other Resources}
+\label{\detokenize{using_sphinx:other-resources}}
 
 \section{Indices and tables}
 \label{\detokenize{index:indices-and-tables}}\begin{itemize}

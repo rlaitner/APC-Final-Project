@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.9.3)  12 DEC 2021 23:55
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2021.9.3)  16 DEC 2021 19:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -842,31 +842,56 @@ Chapter 3.
 
 ]
 Chapter 4.
-(./apc524finalprojectpathfindingalgorithmsolver.ind) [7]
+LaTeX Font Info:    Trying to load font information for T1+txtt on input line 1
+28.
+(/usr/local/texlive/2021/texmf-dist/tex/latex/txfonts/t1txtt.fd
+File: t1txtt.fd 2000/12/15 v3.1
+)
+LaTeX Font Info:    Font shape `T1/txtt/b/n' in size <10> not available
+(Font)              Font shape `T1/txtt/bx/n' tried instead on input line 128.
+LaTeX Font Info:    Font shape `T1/txtt/m/it' in size <10> not available
+(Font)              Font shape `T1/txtt/m/sl' tried instead on input line 208.
+ [7] [8]
+[9]
+Underfull \hbox (badness 10000) in paragraph at lines 331--333
+[]\T1/qtm/m/n/10 You can also clone the repos-i-tory us-ing \T1/txtt/m/n/10 git
+ clone https://github.com/rlaitner/
+ []
+
+[10] [11] (./apc524finalprojectpathfindingalgorithmsolver.ind [12] [13
+
+
+
+])
 (./apc524finalprojectpathfindingalgorithmsolver.aux)
 Package rerunfilecheck Info: File `apc524finalprojectpathfindingalgorithmsolver
 .out' has not changed.
-(rerunfilecheck)             Checksum: 32C2949BC65FAA7B97EC09C82503D283;612.
+(rerunfilecheck)             Checksum: 10B2C919A7C7692CF00A5E87ACCC2E7E;4445.
  ) 
 Here is how much of TeX's memory you used:
- 13412 strings out of 478994
- 195882 string characters out of 5858185
- 529133 words of memory out of 5000000
- 30532 multiletter control sequences out of 15000+600000
- 444679 words of font info for 61 fonts, out of 8000000 for 9000
+ 13578 strings out of 478994
+ 198786 string characters out of 5858185
+ 553904 words of memory out of 5000000
+ 30647 multiletter control sequences out of 15000+600000
+ 457556 words of font info for 69 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
- 83i,11n,88p,329b,393s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}{/usr/
-local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}</usr/local/tex
+ 83i,11n,88p,1120b,497s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-ec.enc}{/usr/l
+ocal/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc}</usr/local/tex
 live/2021/texmf-dist/fonts/type1/public/tex-gyre/qhvb.pfb></usr/local/texlive/2
 021/texmf-dist/fonts/type1/public/tex-gyre/qhvbi.pfb></usr/local/texlive/2021/t
-exmf-dist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2021/texmf-d
-ist/fonts/type1/public/tex-gyre/qtmr.pfb>
-Output written on apc524finalprojectpathfindingalgorithmsolver.pdf (11 pages, 1
-04324 bytes).
+exmf-dist/fonts/type1/public/tex-gyre/qhvr.pfb></usr/local/texlive/2021/texmf-d
+ist/fonts/type1/public/tex-gyre/qtmb.pfb></usr/local/texlive/2021/texmf-dist/fo
+nts/type1/public/tex-gyre/qtmr.pfb></usr/local/texlive/2021/texmf-dist/fonts/ty
+pe1/public/tex-gyre/qtmri.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/p
+ublic/txfonts/t1xbtt.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public
+/txfonts/t1xtt.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/txfon
+ts/t1xtt.pfb>
+Output written on apc524finalprojectpathfindingalgorithmsolver.pdf (17 pages, 1
+70013 bytes).
 PDF statistics:
- 109 PDF objects out of 1000 (max. 8388607)
- 86 compressed objects within 1 object stream
- 17 named destinations out of 1000 (max. 500000)
- 61 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 287 PDF objects out of 1000 (max. 8388607)
+ 251 compressed objects within 3 object streams
+ 51 named destinations out of 1000 (max. 500000)
+ 277 words of extra memory for PDF output out of 10000 (max. 10000000)
 

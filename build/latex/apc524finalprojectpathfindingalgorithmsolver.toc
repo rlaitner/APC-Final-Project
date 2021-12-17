@@ -2,5 +2,32 @@
 \contentsline {chapter}{\numberline {1}About}{1}{chapter.1}%
 \contentsline {chapter}{\numberline {2}Overview of Our System’s Functionality}{3}{chapter.2}%
 \contentsline {chapter}{\numberline {3}Notes}{5}{chapter.3}%
-\contentsline {chapter}{\numberline {4}Modules}{7}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Indices and tables}{7}{section.4.1}%
+\contentsline {chapter}{\numberline {4}Contents}{7}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Algorithm Factory}{7}{section.4.1}%
+\contentsline {subsection}{\numberline {4.1.1}Generates a PathingAlgorithm class to be used by higher level code.}{7}{subsection.4.1.1}%
+\contentsline {section}{\numberline {4.2}Project Background}{8}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Introduction}{8}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Overview of Functionality}{8}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Path\sphinxhyphen {}Finding Algorithms}{9}{subsection.4.2.3}%
+\contentsline {subsubsection}{Rapidly\sphinxhyphen {}Exploring Random Tree (RRT)}{9}{subsubsection*.4}%
+\contentsline {subsubsection}{A* Algorithm}{9}{subsubsection*.5}%
+\contentsline {subsubsection}{Dijkstra’s Algorithm}{9}{subsubsection*.6}%
+\contentsline {subsubsection}{Obstacles}{10}{subsubsection*.7}%
+\contentsline {subsubsection}{Vehicles}{10}{subsubsection*.8}%
+\contentsline {section}{\numberline {4.3}Installing the Library}{10}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Setting up the Interface}{11}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Algorithms}{11}{section.4.5}%
+\contentsline {subsection}{\numberline {4.5.1}RRT}{11}{subsection.4.5.1}%
+\contentsline {subsection}{\numberline {4.5.2}A*}{11}{subsection.4.5.2}%
+\contentsline {section}{\numberline {4.6}Obstacles}{11}{section.4.6}%
+\contentsline {section}{\numberline {4.7}Vehicles}{11}{section.4.7}%
+\contentsline {subsection}{\numberline {4.7.1}Car}{11}{subsection.4.7.1}%
+\contentsline {subsection}{\numberline {4.7.2}Tricycle}{11}{subsection.4.7.2}%
+\contentsline {subsection}{\numberline {4.7.3}UAV}{11}{subsection.4.7.3}%
+\contentsline {section}{\numberline {4.8}Pathing Simulator}{11}{section.4.8}%
+\contentsline {section}{\numberline {4.9}Visualizer}{11}{section.4.9}%
+\contentsline {section}{\numberline {4.10}Using Sphinx for Documentation}{11}{section.4.10}%
+\contentsline {subsection}{\numberline {4.10.1}Overview}{11}{subsection.4.10.1}%
+\contentsline {subsection}{\numberline {4.10.2}Other Resources}{12}{subsection.4.10.2}%
+\contentsline {section}{\numberline {4.11}Indices and tables}{12}{section.4.11}%
+\contentsline {chapter}{Index}{13}{section*.9}%

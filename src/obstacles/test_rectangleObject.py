@@ -15,16 +15,6 @@ def test_origin(rectangleObject):
 def test_length(rectangleObject):
     assert rectangleObject.length == 4
 
-<<<<<<< HEAD
-def test_width(rectangleObject):
-    assert rectangleObject.width == 3
-
-def test_vertices(rectangleObject):
-    assert rectangleObject.vertices == [[2, 7], 
-                                        [2, 11],
-                                        [5, 11],
-                                        [5, 7]]
-=======
 
 def test_width(rectangleObject):
     assert rectangleObject.width == 3
@@ -35,4 +25,3 @@ def test_lines(rectangleObject):
                                      [(2, 7), (2, 11)],
                                      [(2, 11), (5, 11)],
                                      [(5, 7), (5, 11)]]
->>>>>>> 40a624cf49bcd696ee2448bccaeb99ef8ceaf50d

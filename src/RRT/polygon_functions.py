@@ -127,3 +127,11 @@ def line_circle_intersect(edge, obstacle):
         return True
     else:
         return False
+    
+def euc_distance(vertex, circle_obstacle):
+    x = vertex[0] - circle_obstacle.position[0]
+    y = vertex[1] - circle_obstacle.position[1]
+    
+    dist = ((x ** 2) + (y ** 2)) ** 0.5
+    
+    return dist

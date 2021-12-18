@@ -58,25 +58,19 @@ def circle_circle_collision(circle1, circle2):
 def circle_polygon_collision(circle, obstacle):
 
     for l in obstacle.lines:
-        print(obstacle.lines)
         intersect = line_circle_intersect(l, circle)
-        print(intersect)
-        
         if intersect:
-            print('hi23')
             return True
     
     inside_polygon = is_inside_polygon(circle.position, obstacle.verts)
     if inside_polygon:
-        print('hi24')
         return True
     
-    distance = 0
+    distance = math.inf
     
     for v in obstacle.verts:
-        if abs(math.dist(circle.position, v) > distance):
-            distance = abs(math.dist(circle.position, v))
-            print('hi')
+        if euc_distance(v, circle) < distance:
+            distance = euc_distance(v, circle)
     
     if distance > circle.radius:
         return False

@@ -1,50 +1,45 @@
-import obstacles
-import vehicle_class
-import obstacle_collision_detection
+from obstacle import Obstacle
+#import vehicle_class
+from obstacle_collision_detection import *
+from point_obstacle_collision_detection import *
 import numpy as np
+from typing import List, Tuple
 
-def conf_free(q: Tuple[np.ndarray, float], obstacles) -> bool:
+def conf_free(q, obstacles):
 
     """
     Check to see if a configuration is in the free space.
     
-    This function checks if the configuration q lies outside of all the obstacles in the connfiguration space.
+    This function checks if the configuration q lies outside of all the obstacles in the configuration space.
     
-    q: An np.ndarray describing a shape representing a random position.
+    q: An np.ndarray of shape (2,) representing a random location.
 
-    obstacles: A list of obstacles. A circle obstacle is a tuple of the form (center, radius) representing a circle,
-    a rectangle obstacle is a tuple of the form (center, length, width), and a triangle obstacle is a tuple of the 
-    form (vertices).
+    obstacles: A list of obstacles. A circle obstacle is represented by a center and radius in the form of a tuple: 
+    [np.ndarray, float]. A rectangle obstacle is represented by an origin point, length, and width in the form of a tuple:
+    [np.ndarray, float, float]. A triangle obstacle is represented by three vertices in the form a tuple: 
+    [np.ndarray, np.ndarray. np.ndarray].
 
     return: True if the configuration is in the free space, i.e. it lies outside of all the obstacles in `obstacles`. 
     Otherwise return False.
     """
 
-    for i in range(0, len(obstacles)):
-        
+    for o in obstacles:
         # If obstacle is a circle
-        if len(obstacles[i]) == 2:
-            collision = circle_conf_collision(q, obstacles[i])
+        if o.shape == "circle":
+            collision = is_inside_circle(q, o)
 
             if collision:
                 return False
-
-        # If obstacle is a rectangle
-            collision = rectangle_conf_collision(q, obstacles[i])
-
-            if collision:
-                return False
-
-        # If obstacle is a triangle
+            
+        # If obstacle is a polygon
         else:
-            triangle_conf_collision(q, obstacles[i])
-
+            collision = is_inside_polygon(q, o.verts)
             if collision:
                 return False
-        
+
     return True
 
-def edge_free(edge: Tuple[np.ndarray, np.ndarray], obstacles: List[Tuple[np.ndarray, float]]) -> bool:
+def edge_free(edge, obstacles):
     """
     Check if a graph edge is in the free space.
     
@@ -82,7 +77,7 @@ def edge_free(edge: Tuple[np.ndarray, np.ndarray], obstacles: List[Tuple[np.ndar
         
     return True
 
-def random_conf(width: float, height: float) -> np.ndarray:
+def random_conf(width, height):
     """
     Sample a random configuration from the configuration space.
     
@@ -106,7 +101,7 @@ def random_conf(width: float, height: float) -> np.ndarray:
 
     return conf
 
-def random_free_conf(width: float, height: float, obstacles: List[Tuple[np.ndarray, float]]) -> np.ndarray:
+def random_free_conf(width, height, obstacles):
     """
     Sample a random configuration from the free space.
     
@@ -120,7 +115,6 @@ def random_free_conf(width: float, height: float, obstacles: List[Tuple[np.ndarr
     obstacles: The list of configuration space obstacles as defined in `edge_free` and `conf_free`.
 
     return: A random configuration uniformily distributed across the configuration space.
-    
     """
     
     # Check if in free space 
@@ -149,7 +143,6 @@ def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
     a vertex.
 
     return: The index (i.e. row of `vertices`) of the vertex that is closest to `conf`.
-    
     """
     
     min_dist = np.Inf
@@ -164,4 +157,30 @@ def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
     
     return index
 
-    # Need to add extend() function
+def extend(origin: np.ndarray, target: np.ndarray, step_size: float=0.2) -> np.ndarray:
+    """
+    Extends the RRT at most a fixed distance toward the target configuration.
+    
+    Given a configuration in the RRT graph `origin`, this function returns a new configuration that takes a
+    step of at most `step_size` towards the `target` configuration. That is, if the L2 distance between `origin`
+    and `target` is less than `step_size`, return `target`. Otherwise, return the configuration on the line
+    segment between `origin` and `target` that is `step_size` distance away from `origin`.
+    
+    @param origin: A vertex in the RRT graph to be extended.
+    @param target: The vertex that is being extended towards.
+    @param step_size: The maximum allowed distance the returned vertex can be from `origin`.
+    
+    @return: A new configuration that is as close to `target` as possible without being more than
+            `step_size` away from `origin`.
+    """
+   
+    # Check Euclidean distance and move in that direction based on step size 
+    dist = np.sqrt((origin[0]-target[0])**2 + (origin[1] - target[1])**2)
+    if dist < step_size:
+        return target 
+    else: 
+        u = (target-origin)
+        u_norm = u/np.linalg.norm(u)
+        new_conf = origin + (step_size * u_norm)
+    
+    return new_conf

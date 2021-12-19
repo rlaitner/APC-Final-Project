@@ -8,12 +8,9 @@ def is_inside_circle(conf, circle_obstacle):
 
     conf: The location of the point being tested represented as an np.ndarray
     of shape (2,).
+    circle_obstacle: The circle obstacle being tested.
 
-    circle_obstacle: The circle obstacle represented by a center and radius of the form
-    Tuple[np.ndarray, float].
-
-    return: True if the configuration is in collision with the circle and false
-    if not.
+    return: True if the configuration is in collision with the circle and False if not.
     """
     
     # Store the points that represent the randomly chosen point conf
@@ -40,6 +37,7 @@ def is_inside_circle(conf, circle_obstacle):
     # If point is within bounds of circle, then there is a collision and return True
     if ((y >= y_min) and (y <= y_max) and (x >= x_min) and (x <= x_max)):
         return True
+
     else:
         return False
 
@@ -48,12 +46,11 @@ def is_inside_polygon(p, points):
     Function checks whether or not point 'p' is within the polygon outlined by 
     the set of vertices 'points'.
     
-    p: The location of the point being tested represented as an np.ndarray
-    of shape (2,).
+    p: The location of the point being tested represented as an np.ndarray of shape (2,).
     
     points: Set of vertices that represents the polygon represented as a list of tuples.
     
-    returns: Returns true if the point lies within the polygon and false otherwise.
+    returns: Returns true if the point lies within the polygon and False otherwise.
     """
     
     n = len(points)

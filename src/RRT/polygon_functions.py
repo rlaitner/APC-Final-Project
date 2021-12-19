@@ -7,12 +7,10 @@ def on_segment(p, q, r):
     point q lies on line segment 'pr'.
 
     p: First endpoint of line 'pr' described by a tuple.
-
     q: Point being tested described by a tuple.
-
     r: Second endpoint of line 'pr' described by a tuple.
 
-    return: True if the point is in collision with tuple.
+    return: True if the point is in collision with tuple and False otherwise.
     """
     
     if ((q[0] <= max(p[0], r[0])) &
@@ -28,9 +26,7 @@ def orientation(p, q, r):
     Finds the orientation of an ordered set of vertices(p, q, r).
 
     p: First vertex represented as a tuple.
-
     q: Second vertex represented as a tuple.
-
     r: Third vertex represented as a tuple.
 
     returns: 
@@ -42,12 +38,15 @@ def orientation(p, q, r):
     val = ((q[1] - p[1]) *(r[0] - q[0])) - ((q[0] - p[0]) * (r[1] - q[1]))
 
     if val == 0:
+
         #Collinear
         return 0
     if val > 0:
+
         # Clock
         return 1
     else:
+
         # Counterclock
         return 2
 
@@ -56,18 +55,14 @@ def line_intersect(p1, q1, p2, q2):
     Checks if two lines 'p1q1' and 'p2q2' interesect.
     
     p1: First end point of the first line represented as an np.ndarray.
-
     q1: Second end point of the first line represented as an np.ndarray.
-
     p2: First end point of the second line represented as an np.ndarray.
-
     q2: Second end point of the second line represented as an np.ndarray.
 
-    returns: True if the two lines intersect and false if they don't.
+    returns: True if the two lines intersect and False if they don't.
     """
      
-    # Find the 4 orientations required for
-    # the general and special cases
+    # Find the 4 orientations required for the general and special cases
     o1 = orientation(p1, q1, p2)
     o2 = orientation(p1, q1, q2)
     o3 = orientation(p2, q2, p1)
@@ -103,7 +98,6 @@ def line_circle_intersect(edge, circle_obstacle):
     Checks whether or not an edge or line intersects with a circle.
     
     edge: A tuple containing the two segment endpoints, each represented by an np.ndarray.
-    
     obstacle: Represents the circle obstacle object.
     
     return: True if the edge/line intersects with the circle obstacle and False otherwise.
@@ -130,6 +124,14 @@ def line_circle_intersect(edge, circle_obstacle):
     return False
     
 def euc_distance(vertex, circle_obstacle):
+    """
+    Finds the distance between the point and center of the circle.
+
+    vertex: Vertex in question.
+    circle_obstacle: Circle obstacle in question.
+
+    return: Distance between the vertex and the center of the circle.
+    """
     x = vertex[0] - circle_obstacle.position[0]
     y = vertex[1] - circle_obstacle.position[1]
     

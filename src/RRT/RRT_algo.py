@@ -39,44 +39,6 @@ def conf_free(q, obstacles):
 
     return True
 
-def edge_free(edge, obstacles):
-    """
-    Check if a graph edge is in the free space.
-    
-    This function checks if a graph edge, i.e. a line segment specified as two end points, lies entirely outside of
-    every obstacle in the configuration space.
-    
-    edge: A tuple containing the two segment endpoints.
-
-    obstacles: A list of obstacles as described.
-
-    return: True if the edge is in the free space, i.e. it lies entirely outside of all the obstacles in `obstacles`. 
-    Otherwise return False.
-    """
-    
-    for i in range(0, len(obstacles)):
-        
-        # If the obstacle is a circle
-        if len(curr_obstacle) == 2:
-            collision = edge_circle_collision(edge, obstacles[i])
-            
-            if collision:
-                return False
-        
-        # Obstacle is either a rectangle or a triangle
-        else:
-        
-            # Iterates through all lines of each polygon 
-            for k in obstacles[i].lines:
-                new_p2 = obstacles[i].lines[k][0]
-                new_q2 = obstacles[i].lines[k][1]
-                collision = doIntersect(edge[0], edge[1], new_p2, new_q2)
-                
-                if collision:
-                    return False
-        
-    return True
-
 def random_conf(width, height):
     """
     Sample a random configuration from the configuration space.
@@ -157,14 +119,9 @@ def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
     
     return index
 
-def extend(origin: np.ndarray, target: np.ndarray, step_size: float=0.2) -> np.ndarray:
+def extend(origin, target, vehicle, step_size: float=0.2):
     """
-    Extends the RRT at most a fixed distance toward the target configuration.
-    
-    Given a configuration in the RRT graph `origin`, this function returns a new configuration that takes a
-    step of at most `step_size` towards the `target` configuration. That is, if the L2 distance between `origin`
-    and `target` is less than `step_size`, return `target`. Otherwise, return the configuration on the line
-    segment between `origin` and `target` that is `step_size` distance away from `origin`.
+    Extends the RRT at most a fixed distance toward the target configuration. Given a configuration in the RRT     graph `origin`, this function returns a new configuration that takes a step of at most `step_size` towards     the `target` configuration. That is, if the L2 distance betwee`origin' and `target` is less than       `step_size`, return `target`. Otherwise, return the configuration on the line segment between `origin` and `target` that is `step_size` distance away from `origin`.
     
     @param origin: A vertex in the RRT graph to be extended.
     @param target: The vertex that is being extended towards.
@@ -174,13 +131,97 @@ def extend(origin: np.ndarray, target: np.ndarray, step_size: float=0.2) -> np.n
             `step_size` away from `origin`.
     """
    
-    # Check Euclidean distance and move in that direction based on step size 
+     # Check Euclidean distance and move in that direction based on step size 
     dist = np.sqrt((origin[0]-target[0])**2 + (origin[1] - target[1])**2)
     if dist < step_size:
-        return target 
-    else: 
+        return target
+    else:
         u = (target-origin)
         u_norm = u/np.linalg.norm(u)
         new_conf = origin + (step_size * u_norm)
     
     return new_conf
+
+def rrt(origin, width, height, obstacles, trials, step_size, vehicle):
+    """
+    Explore a workspace using the RRT algorithm.
+    
+    This function builds an RRT using `trials` samples from the free space.
+    
+    @param origin: The starting configuration of the robot.
+    @param width: The width of the configuration space.
+    @param height: The height of the configuration space.
+    @param obstacles: A list of obstacles.
+    @param trials: The number of configurations to sample from the free space.
+    @param step_size: The step_size to pass to `extend`.
+    
+    @return: A tuple (`vertices`, `parents`), where `vertices` is an (n, 2) `np.ndarray` where each row is a configuration vertex and `parents` is an array identifying the parent, i.e. `parents[i]` is the parent of the vertex in
+             the `i`th row of `vertices.
+    """
+    
+    # Check if initialized vehicle collides w/ obstacles
+    obstacle_free = free_vehicle(vehicle, obstacles)
+    
+    if obstacle_free == False:
+        exit()
+        
+    num_verts = 1
+    
+    vertices = np.zeros((trials + 1, len(origin)))
+    vertices[0, :] = origin
+    parents = np.zeros(trials + 1, dtype=int)
+    parents[0] = -1
+    
+    # Run RRT 
+    for trial in range(trials):
+        
+        # Samples a new random configuration
+        q_rand = random_free_conf(width, height, obstacles)
+        
+        # Finds index of the vertex that is the closest to the newly sampled configuration
+        q_near_index = nearest_vertex(q_rand, vertices)
+        q_near = vertices[q_near_index, :]
+        
+        # Extends from the identified closest vertex to the direction of the newly sampled configuration
+        q_s = extend(q_near, q_rand, vehicle)
+        
+        # Need to check if edge and obstacle collides w/ circle or polygon
+        for o in obstacles:
+            edge_obstacle_collision([q_near, q_s], o)
+                
+            if not circle_edge_collision:
+                vertices[num_verts, :] = q_s
+                parents[num_verts] =  q_near_index
+                num_verts +=1
+    
+    return vertices[:num_verts, :], parents[:num_verts]
+
+def backtrack(index: int, parents: np.ndarray) -> List[int]:
+    """
+    Find the sequence of nodes from the origin of the graph to an index.
+    
+    This function returns a List of vertex indices going from the origin vertex to the vertex `index`.
+    
+    @param index: The vertex to find the path through the tree to.
+    @param parents: The array of vertex parents as specified in the `rrt` function.
+    
+    @return: The list of vertex indicies such that specifies a path through the graph to `index`.
+    """
+    
+    # Track the root 
+    path_reverse = []
+    path = []
+    path_reverse.append(index)
+    current_index = index
+    
+    while current_index != -1:
+        parent_index = parents[current_index] 
+        path_reverse.append(parent_index)
+        current_index = parent_index 
+        
+    for i in range(0, len(path_reverse)):
+        path.append(path_reverse[len(path_reverse) - i - 1])
+        
+    return path 
+
+    

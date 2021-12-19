@@ -97,7 +97,7 @@ def line_intersect(p1, q1, p2, q2):
     # If none of the cases
     return False
 
-def line_circle_intersect(edge, obstacle):
+def line_circle_intersect(edge, circle_obstacle):
     """
     Checks whether or not an edge or line intersects with a circle.
     
@@ -108,25 +108,25 @@ def line_circle_intersect(edge, obstacle):
     return: True if the edge/line intersects with the circle obstacle and False otherwise.
     """
 
-    i = edge[0]
+    o = edge[0]
     f = edge[1]
     
-    u = f - i
+    u = (f-o)
     u_norm = u/np.linalg.norm(u)
-    
-    # Store circle center (x,y) value 
-    c = obstacle.position
             
-    # Store circle radius
-    r = obstacle.radius
+    # Store circle center (x,y) value 
+    c = circle_obstacle.position
+    
+    # Store circle radius 
+    r = circle_obstacle.radius
         
     # Solve for nabla
-    nabla = (np.dot(u_norm, (i-c)))**2 - ((np.dot(i-c, i-c) **2) - r**2)
+    nabla = (np.dot(u_norm, (o-c)))**2 - (np.dot(o-c, o-c) - r**2)
         
     if (nabla >= 0):
         return True
-    else:
-        return False
+    
+    return False
     
 def euc_distance(vertex, circle_obstacle):
     x = vertex[0] - circle_obstacle.position[0]

@@ -56,8 +56,6 @@ def is_inside_polygon(p, points):
     returns: Returns true if the point lies within the polygon and false otherwise.
     """
     
-    # Returns true if the point p lies
-    # inside the polygon[] with n vertices
     n = len(points)
     
     # There must be at least 3 vertices

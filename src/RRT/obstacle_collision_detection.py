@@ -5,18 +5,18 @@ from polygon_functions import *
 from point_obstacle_collision_detection import *
 from typing import List, Tuple
 
-def edge_obstacle_collision(edge, obstacle):
+def edge_obstacle_collision(edge, obstacles):
     """
-    Checks if an edge/line will interesect with a circle.
+    Checks if an edge/line will interesect with an obstacle.
 
     edge: A tuple containing the two segment endpoints, each represented by an np.ndarray.
 
-    obstacle: A list of obstacles as described in `conf_free`.
+    obstacles: A list of obstacles as described in `conf_free`.
 
     @return: True if the edge does collide with an obstacle and False otherwise.
     """
     
-    for o in obstacle:
+    for o in obstacles:
         if o.shape == "circle":
             intersect = line_circle_intersect(edge, o)
             
@@ -58,12 +58,16 @@ def circle_circle_collision(circle1, circle2):
 def circle_polygon_collision(circle, obstacle):
 
     for l in obstacle.lines:
+        print(l)
         intersect = line_circle_intersect(l, circle)
+        print(intersect)
         if intersect:
+            print('intersect')
             return True
     
     inside_polygon = is_inside_polygon(circle.position, obstacle.verts)
     if inside_polygon:
+        print('inside_polygon')
         return True
     
     distance = math.inf
@@ -73,6 +77,7 @@ def circle_polygon_collision(circle, obstacle):
             distance = euc_distance(v, circle)
     
     if distance > circle.radius:
+        print('radius')
         return False
     else:
         return True
@@ -141,17 +146,6 @@ def is_separating_axis(o: np.ndarray, p1: List[np.ndarray], p2: List[np.ndarray]
         return False
     else:
         return True
-
-def centers_displacement(p1: np.ndarray, p2: np.ndarray) -> float:
-    """
-    Return the displacement between the geometric center of p1 and p2.
-    """
-
-    # Geometric center
-    c1 = np.mean(np.array(p1), axis=0)
-    c2 = np.mean(np.array(p2), axis=0)
-
-    return c2 - c1
     
 def polygon_collision(p1: List[np.ndarray], p2: List[np.ndarray]) -> bool:
     """
@@ -179,4 +173,38 @@ def polygon_collision(p1: List[np.ndarray], p2: List[np.ndarray]) -> bool:
             # They do not collide
             return False
 
+    return True
+
+def free_vehicle(vehicle, obstacles):
+    for o in obstacles:
+        if vehicle.shape == "circle":
+            if o.shape == "circle":
+                print('hicircle')
+                circle_collision = circle_circle_collision(vehicle, o)
+                
+                if circle_collision:
+                    print('hi1')
+                    return False
+            else:
+                print('hi5')
+                p_collision = circle_polygon_collision(vehicle, o)
+            
+                if p_collision:
+                    print('hi2')
+                    return False
+            
+        else:
+            if o.shape == "circle":
+                c_p_collision = circle_polygon_collision(o, vehicle)
+                
+                if circle_polygon_collision:
+                    print('hi3')
+                    return False
+            
+            else:
+                collision = polygon_collision(vehicle.verts, obstacle.verts)
+                
+                if collision:
+                    print('hi4')
+                    return False
     return True

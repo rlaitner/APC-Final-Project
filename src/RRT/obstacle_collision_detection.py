@@ -58,16 +58,12 @@ def circle_circle_collision(circle1, circle2):
 def circle_polygon_collision(circle, obstacle):
 
     for l in obstacle.lines:
-        print(l)
         intersect = line_circle_intersect(l, circle)
-        print(intersect)
         if intersect:
-            print('intersect')
             return True
     
     inside_polygon = is_inside_polygon(circle.position, obstacle.verts)
     if inside_polygon:
-        print('inside_polygon')
         return True
     
     distance = math.inf
@@ -77,7 +73,6 @@ def circle_polygon_collision(circle, obstacle):
             distance = euc_distance(v, circle)
     
     if distance > circle.radius:
-        print('radius')
         return False
     else:
         return True
@@ -179,32 +174,26 @@ def free_vehicle(vehicle, obstacles):
     for o in obstacles:
         if vehicle.shape == "circle":
             if o.shape == "circle":
-                print('hicircle')
                 circle_collision = circle_circle_collision(vehicle, o)
                 
                 if circle_collision:
-                    print('hi1')
                     return False
             else:
-                print('hi5')
                 p_collision = circle_polygon_collision(vehicle, o)
             
                 if p_collision:
-                    print('hi2')
                     return False
             
         else:
             if o.shape == "circle":
                 c_p_collision = circle_polygon_collision(o, vehicle)
                 
-                if circle_polygon_collision:
-                    print('hi3')
+                if c_p_collision:
                     return False
             
             else:
-                collision = polygon_collision(vehicle.verts, obstacle.verts)
+                collision = polygon_collision(vehicle.verts, o.verts)
                 
                 if collision:
-                    print('hi4')
                     return False
     return True

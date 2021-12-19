@@ -1,4 +1,5 @@
 import numpy as np
+import math
 
 def on_segment(p, q, r):
     """
@@ -121,7 +122,7 @@ def line_circle_intersect(edge, circle_obstacle):
     r = circle_obstacle.radius
         
     # Solve for nabla
-    nabla = (np.dot(u_norm, (o-c)))**2 - (np.dot(o-c, o-c) - r**2)
+    nabla = (np.dot(u_norm, (o-c)))**2 - (np.dot(o-c, o-c)**2 - r**2)
         
     if (nabla >= 0):
         return True

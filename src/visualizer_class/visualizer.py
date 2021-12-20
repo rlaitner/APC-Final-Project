@@ -6,7 +6,6 @@ from vehicle_class import Vehicle, Car, UAV, Tricycle
 
 import numpy as np
 
-
 class Visualizer():
     def __init__(self, dims, obstacles, vehicle):
         (self.x, self.y) = dims
@@ -53,4 +52,4 @@ class Visualizer():
                                frames=len(path), init_func = start,
                                interval=len(path)//5, repeat = False,
                                blit=False)
-        return anim        return anim
+        return anim

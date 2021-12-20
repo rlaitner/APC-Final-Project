@@ -26,6 +26,7 @@ class RRT(PathingAlgorithm):
             
         if self.path_list is None:
             vertices, parents = self.rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle)
+            print(vertices)
             index = self.nearest_vertex(self.goal, vertices)
             self.path_verts = self.backtrack(index, parents)
             path_list = []

@@ -41,7 +41,7 @@ class Vehicle:
         self.type = None
         self.vehicle_data = vehicle_data
     
-    def init_vehicle(self)
+    def init_vehicle(self):
         if (self.vehicle_data["vehicle_type"] == "UAV"):
             return UAV(self.init_position, self.vehicle_data["vehicle_size"])
         elif (self.vehicle_data["vehicle_type"] == "car"):

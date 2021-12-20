@@ -40,7 +40,6 @@ class RRT(PathingAlgorithm):
 
         else:
             index = None
-            print(f"{origin}")
             for i in range(len(self.path_list)):
                 if abs(self.path_list[i][0] - origin[0]) < self.EPSILON and\
                     abs(self.path_list[i][1] - origin[1]) < self.EPSILON:
@@ -51,7 +50,10 @@ class RRT(PathingAlgorithm):
                 return self.make_route(origin)
 
             else:
-                return self.path_list[index+1]
+                try:
+                   return self.path_list[index], self.path_list[index+1]
+                except IndexError:
+                    return self.path_list[index], self.path_list[index]
 
     def conf_free(self, q, obstacles):
 

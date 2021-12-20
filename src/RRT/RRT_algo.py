@@ -8,8 +8,22 @@ class RRT(PathingAlgorithm):
     def __init__(self, vehicle):
         self.vehicle = vehicle
         self.path_list = None
+        self.configured = False
+
+    def set_config(self, algo_dict, setting):
+        self.origin = algo_dict["origin"]
+        self.width = setting.x
+        self.height = setting.y
+        self.obstacles = setting.obstacles
+        self.trials = algo_dict["hyper-parameters"][0]
+        self.step_size = algo_dict["hyper-parameters"][1]
+        self.goal = algo_dict["goal"]
+        self.configured = True
 
     def make_route(self, origin):
+        if self.configured == False:
+            raise RuntimeError("No information available to be configured with")
+            
         if self.path_list is None:
             vertices, parents = self.rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle, self.goal)
             index = self.nearest_vertex(self.goal, vertices)
@@ -17,6 +31,7 @@ class RRT(PathingAlgorithm):
             for i in range(len(path_list)):
                 # List of vertices
                 self.path_list.append([vertices[self.path_list[i]][0], vertices[self.path_list[i]][1]])
+                self.path_list.pop(0)
 
         else:
             index = None
@@ -181,7 +196,7 @@ class RRT(PathingAlgorithm):
         obstacle_free = free_vehicle(vehicle, [vehicle.x_init, vehicle.y_init], obstacles)
         
         if obstacle_free == False:
-            exit()
+            raise RuntimeError("Vehicle in collision w/ obstacle")
             
         num_verts = 1
         

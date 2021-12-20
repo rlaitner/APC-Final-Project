@@ -8,6 +8,7 @@ def expanded_obstacle(vehicle,obstacle):
     ----------
         vehicle: a Vehicle object
         obstacle: an Obstacle object
+
     Returns
     -------
         expand_obs: the approximate Minkowski sum of the vehicle and obstacle

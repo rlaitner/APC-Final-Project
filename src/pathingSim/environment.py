@@ -74,6 +74,7 @@ class Environment:
             try:
                 item = obstacles_clone.popitem()
                 key = item[0]
+                print(f"{key=}")
                 for i in range(obstacles[key]["number"]):
                     # i'm sorry :'(
                     if key == "circle":
@@ -92,9 +93,12 @@ class Environment:
                             data = {k: v}
 
                     data = {"shape": key}
-                    obstacle_factory = Obstacle(pos, data)
-                    obstacle = obstacle_factory.init_obs()
-                    potential_obstacles.append(obstacle)
+                    try:
+                        obstacle_factory = Obstacle(pos, data)
+                        obstacle = obstacle_factory.init_obs()
+                        potential_obstacles.append(obstacle)
+                    except Exception as e:
+                        print(e)
             except KeyError:
                 break
         self.obstacles = [obstacle for obstacle in potential_obstacles
@@ -124,9 +128,10 @@ class Environment:
         -------
             bool
         """
-        for vertex in hazard.vertices:
-            if (vertex[0] > 0 and vertex[0] < self.x and
-               vertex[1] > 0 and vertex[1] < self.y):
-                return True
+        # for vertex in hazard.vertices:
+        #     if (vertex[0] > 0 and vertex[0] < self.x and
+        #        vertex[1] > 0 and vertex[1] < self.y):
+        #         return True
 
-        return False
+        # return False
+        return True

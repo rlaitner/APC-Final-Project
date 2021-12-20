@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib import patches as patches
 
     
-class triangleObstacle(Obstacle):
+class triangleObstacle:
     
     # Class for triangle obstacles
     def __init__(self, position):

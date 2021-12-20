@@ -6,7 +6,7 @@ import numpy as np
 from matplotlib import patches as patches
 
 
-class rectangleObstacle(Obstacle):
+class rectangleObstacle:
     
     # Class for rectangle obstacles
     def __init__(self, position, length, width):

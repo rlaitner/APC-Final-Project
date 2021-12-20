@@ -6,11 +6,11 @@ circleObstacle subclass
 import numpy as np
 from matplotlib import patches as patches
 
-class circleObstacle(Obstacle):
+class circleObstacle:
     
     # Class for circle obstacles    
     def __init__(self, position, radius):
-        
+
         # position is center of circle
         self.shape = "circle"
         # Radius of circle object

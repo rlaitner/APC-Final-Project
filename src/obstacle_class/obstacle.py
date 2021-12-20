@@ -15,4 +15,4 @@ class Obstacle:
         elif (shape_data["shape"] == "rectangle"):
             return rectangleObstacle(self.position, shape_data["length"], shape_data["width"])
         elif (shape_data["shape"] == "triangle"):
-            return rectangleObstacle(self.position)
+            return triangleObstacle(self.position)

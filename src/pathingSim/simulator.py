@@ -90,7 +90,7 @@ class Simulator():
 
     def animate(self, file_name: Union[str, None] = None) -> None:
         fig, ax = self._illustrator.render_environment()
-        ani = self._illustrator.render_path(fig, ax, self._robot.trajectory)
+        ani = self._illustrator.render_path(self._robot.trajectory, fig, ax)
 
         try:
             ani.save(file_name)

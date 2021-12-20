@@ -79,7 +79,8 @@ class Agent():
         vehicle_data["origin"] = [algo_data["origin"], self.heading]
 
         # Instantiate objects
-        self.vehicle: Vehicle = Vehicle(vehicle_data)
+        self.vehicle_factory = Vehicle(vehicle_data)
+        self.vehicle = self.vehicle_factory.init_vehicle()
         self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"], self.vehicle)
 
         # Configure objects

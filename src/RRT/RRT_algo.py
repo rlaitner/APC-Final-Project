@@ -116,7 +116,7 @@ class RRT(PathingAlgorithm):
         free_flag = True 
         while free_flag:
             
-            new_conf = self.andom_conf(width, height)
+            new_conf = self.random_conf(width, height)
             free = self.conf_free(new_conf, obstacles)
             
             if free:

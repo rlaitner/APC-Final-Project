@@ -10,6 +10,7 @@ class triangleObstacle:
     
     # Class for triangle obstacles
     def __init__(self, position):
+        self.position = position
         
         # vertices
         self.shape = "triangle"

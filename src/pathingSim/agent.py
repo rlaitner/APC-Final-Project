@@ -137,7 +137,7 @@ class Agent():
             # Check that the finite time horizon is dynamically-viable
             angle = self.get_angle(np.array([pathx[0], pathy[0]]))
             self.pos = self.vehicle.update(pathx[0], pathy[0], angle)
-            
+
             # If it found a trajectory, good, if it didn't then how many times has it failed?
             if (pathx, pathy) == self.pos:
                 continue

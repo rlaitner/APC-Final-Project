@@ -1,7 +1,7 @@
 {
 	"environment" : {
-    	"length" : 500,
-    	"width" : 500
+    	"length" : 50,
+    	"width" : 50
     },
     "vehicle" : {
       "vehicle_type" : "UAV",
@@ -9,10 +9,10 @@
     },
 	"algorithm" : {
     	"origin" : [0, 0],
-		"goal" : [100, 100],
-        "goal_radius" : 1,
+		"goal" : [25, 30],
+        "goal_radius" : 10,
         "time_step" : 0.01,
-        "total_time" : 100,
+        "total_time" : 1000,
     	"algorithm_type" : "RRT",
     	"hyper-parameters": [1000, 1]
     },

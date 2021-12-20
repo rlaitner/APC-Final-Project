@@ -2,9 +2,9 @@
 Obstacle class
 
 '''
-from circleObstacle import circleObstacle
-from rectangleObstacle import rectangleObstacle
-from triangleObstacle import triangleObstacle
+from obstacle_class.circleObstacle import circleObstacle
+from obstacle_class.rectangleObstacle import rectangleObstacle
+from obstacle_class.triangleObstacle import triangleObstacle
 
 class Obstacle:
     def __init__(self, position, shape_data):

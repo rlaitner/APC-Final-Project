@@ -69,7 +69,14 @@ class Agent():
         setting: Environment
             An obstacles filled environment to path through
         """
-        vehicle_data["origin"].append(algo_data["origin"])
+        # Configure vehicle
+        self.pos = np.asarray(algo_data["origin"])
+        self.goal= np.asarray(algo_data["goal"])
+        self.heading: float = self.get_angle(self.goal)
+
+        self.trajectory = np.transpose(self.pos)
+
+        vehicle_data["origin"].append([algo_data["origin"], self.heading])
 
         # Instantiate objects
         self.vehicle: Vehicle = Vehicle(vehicle_data)
@@ -77,13 +84,6 @@ class Agent():
 
         # Configure objects
         self._planner.set_config(algo_data, setting)
-
-        # Configure vehicle
-        self.pos = np.asarray(algo_data["origin"])
-        self.goal= np.asarray(algo_data["goal"])
-        self.heading: float = self.get_angle(self.goal)
-
-        self.trajectory = np.transpose(self.pos)
 
     def get_angle(self, point) -> float:
         """

@@ -27,7 +27,7 @@ class UAV:
     '''
 
     def __init__(self, init_position, scale):
-        
+
         self.x_init = init_position[0]
         self.y_init = init_position[1]
         self.type = "UAV"
@@ -48,7 +48,7 @@ class UAV:
 
         return UAV_position
 
-    def check_dynamics(x,y,theta):
+    def check_dynamics(self, x, y, theta):
         """
         This function validates dynamics since the UAV allows for 
         full freedom of movement

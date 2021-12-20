@@ -10,6 +10,7 @@ class circleObstacle:
     
     # Class for circle obstacles    
     def __init__(self, position, radius):
+        self.position = position
 
         # position is center of circle
         self.shape = "circle"

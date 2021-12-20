@@ -8,7 +8,6 @@ from obstacle_class.triangleObstacle import triangleObstacle
 
 class Obstacle:
     def __init__(self, position, shape_data):
-        self.position = position
         self.shape_data = shape_data
 
     def init_obs(self):

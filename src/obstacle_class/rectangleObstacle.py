@@ -10,7 +10,8 @@ class rectangleObstacle:
     
     # Class for rectangle obstacles
     def __init__(self, position, length, width):
-        
+        self.position = position
+
         # Starting point of rectangle of which length and width are referenced to
         self.shape = "rectangle"
         # Length of rectangle object

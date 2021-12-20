@@ -1,5 +1,7 @@
 import numpy as np
 from pathingSim.pathing_algorithm import PathingAlgorithm
+from discretize import *
+from expand_obstacles import *
 import obstacles
 import vehicle_class
 

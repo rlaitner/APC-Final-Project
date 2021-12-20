@@ -149,7 +149,7 @@ class Agent():
             print(f"{pathx=}")
             # If it found a trajectory, good, if it didn't then how many times has it failed?
             if pathx[0] == self.pos[0] and pathy[0] == self.pos[1]:
-                continue
+                break
             elif attempt == (MAX_ATTEMPTS - 1):
                 raise RuntimeError("The goal is dynamically unreachable.")
             else:

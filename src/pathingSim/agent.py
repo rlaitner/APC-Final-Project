@@ -120,13 +120,31 @@ class Agent():
         """
         Moves the robot one timestep forward using model-predictive
         control to validate that each step is dynamically possible.
-        """
-        # Get infinite-time horizon path
-        pathx, pathy = self._planner.make_route(self.pos)
 
-        # Check that the finite time horizon is dynamically-viable
-        angle = self.get_angle(np.array([pathx[0], pathy[0]]))
-        self.pos = self.vehicle.update(pathx[0], pathy[0], angle)
+        Raises
+        ------
+        RuntimeError:
+            Raised when a trajectory cannot be found that is dynamically
+            valid the matches a predicted path
+        """
+        # The number of attempts before the dynamics are declared infeasible
+        MAX_ATTEMPTS = 100
+
+        for attempt in range(MAX_ATTEMPTS):
+            # Get infinite-time horizon path
+            pathx, pathy = self._planner.make_route(self.pos)
+
+            # Check that the finite time horizon is dynamically-viable
+            angle = self.get_angle(np.array([pathx[0], pathy[0]]))
+            self.pos = self.vehicle.update(pathx[0], pathy[0], angle)
+            
+            # If it found a trajectory, good, if it didn't then how many times has it failed?
+            if (pathx, pathy) == self.pos:
+                continue
+            elif attempt == (MAX_ATTEMPTS - 1):
+                raise RuntimeError("The goal is dynamically unreachable.")
+            else:
+                pass
 
         # Move to the first point
         self.trajectory = np.append(self.trajectory, np.transpose(self.pos))

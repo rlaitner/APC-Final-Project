@@ -70,8 +70,8 @@ class Agent():
             An obstacles filled environment to path through
         """
         # Instantiate objects
-        self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"])
         self.vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
+        self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"], self.vehicle)
 
         # Configure objects
         self._planner.set_config(algo_data, setting)

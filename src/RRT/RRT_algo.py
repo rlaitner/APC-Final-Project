@@ -5,6 +5,8 @@ import numpy as np
 from typing import List, Tuple
 
 class RRT(PathingAlgorithm):
+    EPSILON = 0.00002
+
     def __init__(self, vehicle):
         self.vehicle = vehicle
         self.path_list = None
@@ -26,29 +28,30 @@ class RRT(PathingAlgorithm):
             
         if self.path_list is None:
             vertices, parents = self.rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle)
-            print(vertices)
             index = self.nearest_vertex(self.goal, vertices)
             self.path_verts = self.backtrack(index, parents)
-            path_list = []
+            self.path_list = []
             for i in range(len(self.path_verts)):
                 # List of vertices
-                path_list.append([vertices[self.path_verts[i]][0], vertices[self.path_verts[i]][1]])
-            path_list.pop(0)
+                self.path_list.append([vertices[self.path_verts[i]][0], vertices[self.path_verts[i]][1]])
+            self.path_list.pop(0)
 
-            return path_list[0], path_list[1]
+            return self.path_list[0], self.path_list[1]
 
         else:
             index = None
+            print(f"{origin}")
             for i in range(len(self.path_list)):
-                if self.path_list[i] == origin:
+                if abs(self.path_list[i][0] - origin[0]) < self.EPSILON and\
+                    abs(self.path_list[i][1] - origin[1]) < self.EPSILON:
                     index = i
             
-            if self.path_list[i] != origin:
+            if index is None:
                 self.path_list = None
                 return self.make_route(origin)
 
             else:
-                return self.path_list[index:]
+                return self.path_list[index+1]
 
     def conf_free(self, q, obstacles):
 

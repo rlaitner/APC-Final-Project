@@ -70,8 +70,26 @@ class Environment:
         if obstacles is None:  # allow for an empty field
             return
 
-        potential_obstacles = [Obstacle(obstacle_data)
-                               for obstacle_data in obstacles.items()]
+        potential_obstacles = []
+        while True:
+            try:
+                item = obstacles.popitem()
+                key = item.keys()
+                for i in range(item[key]["number"]):
+                    # i'm sorry :'(
+                    if key == "circle":
+                        pos = (item[key]["center_x"],item[key]["center_y"])
+                    elif key == "triangle":
+                        pos = item[key]["vertices"][i]
+                    elif key == "rectangles":
+                        pos = item[key]["origin"][i]
+                    else:
+                        raise ValueError("Received an invalid obstacle type.")
+                    
+                    potential_obstacles.append(Obstacle(pos, item[key]))
+            except KeyError:
+                break
+
         self.obstacles = [obstacle for obstacle in potential_obstacles
                           if self.is_in_environment(obstacle)]
 

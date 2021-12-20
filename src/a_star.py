@@ -1,4 +1,5 @@
 import numpy as np
+from pathingSim.pathing_algorithm import PathingAlgorithm
 import obstacles
 import vehicle_class
 
@@ -21,9 +22,14 @@ class A_star(PathingAlgorithm):
         goal
     """
 
-    def __init__(self):
-
-
+    def __init__(self,vehicle, algo_dict, setting, resolution):
+        self.vehicle = vehicle
+        self.origin = algo_dict["origin"]
+        self.goal = algo_dict["goal"]
+        self.obstacles = setting.obstacles
+        self.resolution = resolution
+        self.x_env = setting.x
+        self.y_env = setting.y
 
 
     class Vertex():
@@ -113,15 +119,17 @@ class A_star(PathingAlgorithm):
         return H
 
 
-    ######### This is the function that implements A star #########
-    def make_route(grid, A, B):
+    # This is the function that implements A star
+    def make_route(self, origin):
         """
         Returns a list of tuples as a path from A to B in the given maze
         """
 
+        self.grid = mesh(self.x_env, self.y_env, self.resolution, self.obstacles, self.vehicle)
+
         # Create start and end vertices
-        A_vertex = Vertex(None, A)
-        B_vertex = Vertex(None, B)
+        A_vertex = Vertex(None, origin)
+        B_vertex = Vertex(None, self.goal)
         A_vertex.C = 0
         A_vertex.H = computeH(A_vertex, B_vertex)
         A_vertex.F = A_vertex.H
@@ -158,7 +166,7 @@ class A_star(PathingAlgorithm):
 
 
             # Generate neighbors
-            neighbors = getNeighbors(x_vertex, grid, resolution)
+            neighbors = getNeighbors(x_vertex, self.grid, self.resolution)
 
 
             # Loop through neighbors, update costs, etc.

@@ -1,5 +1,5 @@
 import numpy as np
-from polygon_functions import *
+from RRT.polygon_functions import *
 INT_MAX = 10000
 
 def is_inside_circle(conf, circle_obstacle):

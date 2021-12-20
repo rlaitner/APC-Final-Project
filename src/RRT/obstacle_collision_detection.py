@@ -1,7 +1,7 @@
 import numpy as np
 import math
-from polygon_functions import *
-from point_obstacle_collision_detection import *
+from RRT.polygon_functions import *
+from RRT.point_obstacle_collision_detection import *
 from typing import List, Tuple
 
 def edge_obstacle_collision(edge, obstacles):

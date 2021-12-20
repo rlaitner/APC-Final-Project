@@ -103,6 +103,8 @@ class Agent():
         ValueError
             Raised when the point given is not a unique point in 2-space
         """
+        EPSILON = 0.00002
+
         if len(point) != len(self.pos):
             raise ValueError("Received a trajectory position that has" +
                              " the wrong number of dimensions.")
@@ -111,6 +113,8 @@ class Agent():
 
         dot_prod = np.dot(self.pos, point)
         mag = np.linalg.norm(self.pos) * np.linalg.norm(point)
+        if mag - EPSILON < 0.0:
+            return 0.0
         theta = float(np.arccos(dot_prod/mag))
 
         return theta

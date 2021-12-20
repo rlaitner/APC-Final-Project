@@ -25,12 +25,19 @@ dynamic environment.
 	4. Agent Class
 	5. Environment Class
 	6. Simulator Class    
-2.  Automated Testing 
+2. Automated Testing 
 3. Sample Config Files 
 4. Documentation 
 	1. See /docs for Sphinx 
 
+## Usage 
+User provides config file with adjusted parameters. 
+
  
+## Build Sphinx Documentation 
+Ensure you are located in the ``doc`` directory and choose either ``make html``
+or ``make latexpdf`` for output options. Output will be located in the ``build``
+directory.   
 
 ## Project Status
 
@@ -38,5 +45,5 @@ Version 1.0
 
 ## More Info: 
 - See Sphinx documentation for more in-depth review of contents
-- Access our report [here] (https://www.overleaf.com/read/nrsvyhfggrbr)
+- Access our report [here](https://www.overleaf.com/read/nrsvyhfggrbr)
  

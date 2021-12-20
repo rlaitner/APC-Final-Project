@@ -46,8 +46,8 @@ def circle_circle_collision(circle1, circle2):
     return: Returns True if the two circles are in collision and False otherwise.
     """
     
-    radiiDiff = (circle1.radius - circle2.radius) ** 2
-    radiiSum = (circle1.radius + circle2.radius) ** 2
+    radiiDiff = (circle1.size - circle2.size) ** 2
+    radiiSum = (circle1.size + circle2.size) ** 2
     positionDiff = ((circle1.position[0] - circle2.position[0]) ** 2) + ((circle1.position[1] - circle2.position[1]) ** 2)
                 
     # Compare radii; if expression is satisfied, that means the circles intersect
@@ -86,7 +86,7 @@ def circle_polygon_collision(circle, obstacle):
         if euc_distance(v, circle) < distance:
             distance = euc_distance(v, circle)
     
-    if distance > circle.radius:
+    if distance > circle.size:
         return False
     else:
         return True
@@ -182,15 +182,19 @@ def polygon_collision(p1: List[np.ndarray], p2: List[np.ndarray]) -> bool:
 
     return True
 
-def free_vehicle(vehicle, obstacles):
+def free_vehicle(vehicle, new_position, obstacles):
     """
     Checks when a vehicle gets initialized in the environment, whether or not it is in collision with an obstacle.
 
     vehicle: Vehicle object.
+    new_position: Location of testing whether or not the vehicle can exist without colliding with other obstacles.
     obstacles: List of obstacle objects.
 
     returns: True if the vehicle is not in collision with an obstacle and False otherwise.
     """
+    
+    vehicle.position = new_position
+    print(vehicle.position)
     for o in obstacles:
         
         # If the vehicle is a circle/UAV

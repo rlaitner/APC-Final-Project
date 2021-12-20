@@ -23,7 +23,7 @@ def is_inside_circle(conf, circle_obstacle):
     center_y = center[1]
             
     # Store circle radius 
-    r = circle_obstacle.radius
+    r = circle_obstacle.size
         
     # Set bounds of y for circle at current point 
     y_max = center_y + np.sqrt(np.abs(r**2 - (x-center_x)**2))

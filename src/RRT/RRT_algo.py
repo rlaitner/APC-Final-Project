@@ -104,13 +104,13 @@ def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
     for i in range(0, vertices.shape[0]):
         dist = np.sqrt((conf[0]-vertices[i][0])**2 + (conf[1] - vertices[i][1])**2)
         
-        if (dist < min):
+        if (dist < min_dist):
             min_dist = dist 
             index = i
     
     return index
 
-def extend(origin, target, vehicle, step_size: float=0.2):
+def extend(origin, target, step_size: float=0.2):
     """
     Extends the RRT at most a fixed distance towards the target configuration. Given a configuration in the RRT graph 'origin', 
     this function returns a new configuration that takes a step of at most 'step_size' towards the 'target' configuration. 
@@ -124,10 +124,10 @@ def extend(origin, target, vehicle, step_size: float=0.2):
    
     # Check Euclidean distance and move in that direction based on step size 
     dist = np.sqrt((origin[0]-target[0])**2 + (origin[1] - target[1])**2)
+    print(type(step_size))
     if dist < step_size:
-        return target
-
-    else:
+        return target 
+    else: 
         u = (target-origin)
         u_norm = u/np.linalg.norm(u)
         new_conf = origin + (step_size * u_norm)
@@ -153,7 +153,7 @@ def rrt(origin, width, height, obstacles, trials, step_size, vehicle):
     """
     
     # Check if initialized vehicle collides w/ obstacles
-    obstacle_free = free_vehicle(vehicle, obstacles)
+    obstacle_free = free_vehicle(vehicle, [vehicle.x_init, vehicle.y_init], obstacles)
     
     if obstacle_free == False:
         exit()
@@ -176,17 +176,13 @@ def rrt(origin, width, height, obstacles, trials, step_size, vehicle):
         q_near = vertices[q_near_index, :]
         
         # Extends from the identified closest vertex to the direction of the newly sampled configuration
-        q_s = extend(q_near, q_rand, vehicle)
+        q_s = extend(q_near, q_rand)
         
-        # Need to check if edge and obstacle collides w/ circle or polygon
-        for o in obstacles:
-            edge_obstacle_collision([q_near, q_s], o)
-                
-            if not circle_edge_collision:
-                vertices[num_verts, :] = q_s
-                parents[num_verts] =  q_near_index
-                num_verts +=1
-    
+        if free_vehicle(vehicle, q_s, obstacles):  
+            vertices[num_verts, :] = q_s
+            parents[num_verts] =  q_near_index
+            num_verts +=1
+            
     return vertices[:num_verts, :], parents[:num_verts]
 
 def backtrack(index, parents):

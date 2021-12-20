@@ -113,7 +113,7 @@ def line_circle_intersect(edge, circle_obstacle):
     c = circle_obstacle.position
     
     # Store circle radius 
-    r = circle_obstacle.radius
+    r = circle_obstacle.size
         
     # Solve for nabla
     nabla = (np.dot(u_norm, (o-c)))**2 - (np.dot(o-c, o-c)**2 - r**2)

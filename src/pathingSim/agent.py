@@ -144,6 +144,9 @@ class Agent():
             angle = self.get_angle(np.array([pathx[0], pathy[0]]))
             self.pos = self.vehicle.check_dynamics(pathx[0], pathy[0], angle)
 
+            print(f"{self.pos=}")
+            print(f"{pathy=}")
+            print(f"{pathx=}")
             # If it found a trajectory, good, if it didn't then how many times has it failed?
             if pathx == self.pos[0] and pathy == self.pos[1]:
                 continue

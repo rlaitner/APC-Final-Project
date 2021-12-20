@@ -145,7 +145,7 @@ class Agent():
             self.pos = self.vehicle.check_dynamics(pathx[0], pathy[0], angle)
 
             # If it found a trajectory, good, if it didn't then how many times has it failed?
-            if ((pathx, pathy) == self.pos).all():
+            if pathx == self.pos[0] and pathy == self.pos[1]:
                 continue
             elif attempt == (MAX_ATTEMPTS - 1):
                 raise RuntimeError("The goal is dynamically unreachable.")

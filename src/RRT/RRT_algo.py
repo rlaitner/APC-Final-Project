@@ -29,7 +29,7 @@ class RRT(PathingAlgorithm):
             index = self.nearest_vertex(self.goal, vertices)
             self.path_verts = self.backtrack(index, parents)
             path_list = []
-            for i in range(len(self.path_list)):
+            for i in range(len(path_list)):
                 # List of vertices
                 path_list.append([vertices[self.path_verts[i]][0], vertices[self.path_verts[i]][1]])
             path_list.pop(0)

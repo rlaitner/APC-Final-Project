@@ -1,8 +1,9 @@
 '''
 triangleObstacle subclass
-
 '''
-from obstacle_class.obstacle import Obstacle
+
+import numpy as np
+from obstacle import Obstacle
 from matplotlib import patches as patches
 
     
@@ -15,13 +16,14 @@ class triangleObstacle(Obstacle):
         super().__init__(position)
         self.shape = "triangle"
         # Lines that form the triangle
-        self.lines = [[(position[0][0], position[0][1]), (position[1][0], position[1][1])],
+        self.verts = (self.position[0], self.position[1], 
+                     self.position[2])
+
+        self.lines = np.array([[(position[0][0], position[0][1]), (position[1][0], position[1][1])],
                       [(position[0][0], position[0][1]), (position[2][0], position[2][1])],
-                      [(position[1][0], position[1][1]), (position[2][0], position[2][1])]]
+                      [(position[1][0], position[1][1]), (position[2][0], position[2][1])]])
     
     
     def render_obstacle(self):
-        verts = (self.position[0], self.position[1], 
-                     self.position[2])
-        triangle = patches.Polygon(verts, color="brown")
+        triangle = patches.Polygon(self.verts, color="brown")
         return triangle

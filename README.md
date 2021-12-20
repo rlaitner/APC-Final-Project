@@ -37,6 +37,6 @@ dynamic environment.
 Version 1.0
 
 ## More Info: 
-	- See Sphinx documentation for more in-depth review of contents
-	- Access our report [here (https://www.overleaf.com/read/nrsvyhfggrbr)]
+- See Sphinx documentation for more in-depth review of contents
+- Access our report [here] (https://www.overleaf.com/read/nrsvyhfggrbr)
  

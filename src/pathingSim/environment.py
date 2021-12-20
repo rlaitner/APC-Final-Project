@@ -76,20 +76,20 @@ class Environment:
                 print(f"{obstacles=}")
                 item = obstacles.popitem()
                 print(f"{item=}")
-                key = item.keys()
-                print(f"{key=}")
-                for i in range(item[key]["number"]):
+                key = item[0]
+                print(f"{obstacles=}")
+                for i in range(obstacles[key]["number"]):
                     # i'm sorry :'(
                     if key == "circle":
-                        pos = (item[key]["center_x"], item[key]["center_y"])
+                        pos = (obstacles[key]["center_x"], obstacles[key]["center_y"])
                     elif key == "triangle":
-                        pos = item[key]["vertices"][i]
+                        pos = obstacles[key]["vertices"][i]
                     elif key == "rectangles":
-                        pos = item[key]["origin"][i]
+                        pos = obstacles[key]["origin"][i]
                     else:
                         raise ValueError("Received an invalid obstacle type.")
 
-                    data = {k:v[i] for (k, v) in item[key].items()}
+                    data = {k:v[i] for (k, v) in obstacles[key].items()}
                     potential_obstacles.append(Obstacle(pos, data))
             except KeyError:
                 break

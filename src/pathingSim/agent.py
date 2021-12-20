@@ -78,13 +78,13 @@ class Agent():
         self.vehicle.set_config(vehicle_data)
 
         # Configure vehicle
-        self.pos: np.ndarray[float, float] = np.asarray(algo_data["origin"])
-        self.goal: np.ndarray[float, float] = np.asarray(algo_data["goal"])
+        self.pos = np.asarray(algo_data["origin"])
+        self.goal= np.asarray(algo_data["goal"])
         self.heading: float = self.get_angle(self.goal)
 
         self.trajectory = np.transpose(self.pos)
 
-    def get_angle(self, point: np.ndarray[float, float]) -> float:
+    def get_angle(self, point) -> float:
         """
         Get the angle between the current heading and a given point in
         radians

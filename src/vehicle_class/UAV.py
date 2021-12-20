@@ -24,6 +24,13 @@ class UAV(Vehicle):
 
         return UAV_position
 
+    def check_dynamics(x,y,theta):
+        """
+        This function validates dynamics since the UAV allows for 
+        full freedom of movement
+        
+        """
+        return (x,y)
     def render_vehicle(self, position):
         x, y = (position[0], position[1])
         drone = patches.Circle((x, y), self.size)

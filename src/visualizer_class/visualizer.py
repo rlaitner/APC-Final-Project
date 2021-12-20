@@ -7,13 +7,13 @@ from vehicle_class import Vehicle, Car, UAV, Tricycle
 import numpy as np
 
 class Visualizer():
-    def __init__(self, dims, obstacles, vehicle):
-        (self.x, self.y) = dims
-        self.obstacles = obstacles
-        #self.obstacles = environment.obstacles
+    def __init__(self, environment, vehicle, goal):
+        self.x = environment.x
+        self.y = environment.y
+        self.obstacles = environment.obstacles
         self.vehicle_shape = vehicle.type
         self.vehicle = vehicle
-        self.goal = (13,13)
+        self.goal = goal
        
     def render_environment(self):
         fig, ax = plt.subplots()

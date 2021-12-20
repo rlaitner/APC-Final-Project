@@ -9,6 +9,7 @@ from obstacle_class.triangleObstacle import triangleObstacle
 class Obstacle:
     def __init__(self, position, shape_data):
         self.shape_data = shape_data
+        self.position = position
 
     def init_obs(self):
         if (self.shape_data["shape"] == "circle"):

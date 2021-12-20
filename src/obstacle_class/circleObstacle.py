@@ -14,7 +14,7 @@ class circleObstacle(Obstacle):
         super().__init__(position)
         self.shape = "circle"
         # Radius of circle object
-        self.radius = radius
+        self.size = radius
         
         
     def render_obstacle(self):

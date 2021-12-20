@@ -25,10 +25,10 @@ class RRT(PathingAlgorithm):
             raise RuntimeError("No information available to be configured with")
             
         if self.path_list is None:
-            vertices, parents = self.rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle, self.goal)
+            vertices, parents = self.rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle)
             index = self.nearest_vertex(self.goal, vertices)
             self.path_list = self.backtrack(index, parents)
-            for i in range(len(path_list)):
+            for i in range(len(self.path_list)):
                 # List of vertices
                 self.path_list.append([vertices[self.path_list[i]][0], vertices[self.path_list[i]][1]])
                 self.path_list.pop(0)
@@ -46,7 +46,7 @@ class RRT(PathingAlgorithm):
             else:
                 return self.path_list[index:]
 
-    def conf_free(q, obstacles):
+    def conf_free(self, q, obstacles):
 
         """
         Checks to see if a configuration is in free space.
@@ -76,7 +76,7 @@ class RRT(PathingAlgorithm):
 
         return True
 
-    def random_conf(width, height):
+    def random_conf(self, width, height):
         """
         Sample a random configuration from the environment.
         
@@ -99,7 +99,7 @@ class RRT(PathingAlgorithm):
 
         return conf
 
-    def random_free_conf(width, height, obstacles):
+    def random_free_conf(self, width, height, obstacles):
         """
         Sample a random configuration from free space.
         
@@ -125,7 +125,7 @@ class RRT(PathingAlgorithm):
                 
         return conf_result
 
-    def nearest_vertex(conf: np.ndarray, vertices: np.ndarray) -> int:
+    def nearest_vertex(self, conf, vertices):
         """
         Finds the nearest vertex to conf in the set of vertices.
         
@@ -151,7 +151,7 @@ class RRT(PathingAlgorithm):
         
         return index
 
-    def extend(origin, target, step_size: float=0.2):
+    def extend(self, origin, target, step_size: float=0.2):
         """
         Extends the RRT at most a fixed distance towards the target configuration. Given a configuration in the RRT graph 'origin', 
         this function returns a new configuration that takes a step of at most 'step_size' towards the 'target' configuration. 
@@ -174,7 +174,7 @@ class RRT(PathingAlgorithm):
         
         return new_conf
 
-    def rrt(origin, width, height, obstacles, trials, step_size, vehicle):
+    def rrt(self, origin, width, height, obstacles, trials, step_size, vehicle):
         """
         Explore a workspace using the RRT algorithm.
         
@@ -209,23 +209,23 @@ class RRT(PathingAlgorithm):
         for trial in range(trials):
             
             # Samples a new random configuration
-            q_rand = random_free_conf(width, height, obstacles)
+            q_rand = self.random_free_conf(width, height, obstacles)
             
             # Finds index of the vertex that is the closest to the newly sampled configuration
-            q_near_index = nearest_vertex(q_rand, vertices)
+            q_near_index = self.nearest_vertex(q_rand, vertices)
             q_near = vertices[q_near_index, :]
             
             # Extends from the identified closest vertex to the direction of the newly sampled configuration
-            q_s = extend(q_near, q_rand)
+            q_s = self.extend(q_near, q_rand)
             
             if free_vehicle(vehicle, q_s, obstacles):  
                 vertices[num_verts, :] = q_s
-                parents[num_verts] =  q_near_index
+                parents[num_verts] = q_near_index
                 num_verts +=1
                 
         return vertices[:num_verts, :], parents[:num_verts]
 
-    def backtrack(index, parents):
+    def backtrack(self, index, parents):
         """
         Find the sequence of nodes from the origin of the graph to an index.
         

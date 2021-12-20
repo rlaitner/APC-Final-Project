@@ -108,7 +108,7 @@ def line_circle_intersect(edge, circle_obstacle):
     
     u = (f-o)
     u_norm = u/np.linalg.norm(u)
-            
+    
     # Store circle center (x,y) value 
     c = circle_obstacle.position
     

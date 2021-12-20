@@ -1,4 +1,5 @@
 from obstacle import Obstacle
+#import vehicle_class
 from obstacle_collision_detection import *
 from point_obstacle_collision_detection import *
 import numpy as np

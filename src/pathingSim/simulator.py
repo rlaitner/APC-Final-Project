@@ -45,9 +45,9 @@ class Simulator():
                             self._algorithm_configs,
                             self._setting
                             )
-        self._illustrator = Visualizer(self._field_size,
-                                       self._setting.obstacles,
-                                       self._robot.vehicle
+        self._illustrator = Visualizer(self._setting,
+                                       self._robot.vehicle,
+                                       self._algorithm_configs["goal"]
                                        )
 
         # Find relevant timing data

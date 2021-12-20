@@ -35,8 +35,6 @@ class Vehicle:
     def __init__(self, vehicle_data):
 
         init_position = vehicle_data["origin"]
-        self.x_init = init_position[0]
-        self.y_init = init_position[1]
         self.init_position = init_position
         self.type = None
         self.vehicle_data = vehicle_data

@@ -6,7 +6,8 @@ from matplotlib import patches as patches
 class Car:
 
     def __init__(self, init_position, scale):
-        
+        self.x_init = init_position[0]
+        self.y_init = init_position[1]
         self.type = "car"
         L = 2 * scale
         W = 1.5 * scale        

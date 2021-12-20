@@ -38,8 +38,8 @@ User provides config file with adjusted parameters.
 If you do not already have Sphinx installed please see [Sphinx Installation](https://www.sphinx-doc.org/en/master/usage/installation.html)
 for installation directions for your operating system. 
 
-Ensure you are located in the ``doc`` directory and choose either ``make html``
-or ``make latexpdf`` for output options. Output will be located in the ``build``
+Ensure you are located in the ``docs`` directory and choose either ``make html``
+or ``make latexpdf`` for output options. Output will be located in the ``docs/build``
 directory.   
 
 ## Project Status
@@ -49,4 +49,4 @@ Version 1.0
 ## More Info: 
 - See Sphinx documentation for more in-depth review of contents
 - Access our report [here](https://www.overleaf.com/read/nrsvyhfggrbr)
- 
+- You can also access the report via the Final Project directory. 

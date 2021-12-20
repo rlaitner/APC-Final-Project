@@ -14,7 +14,7 @@
         "time_step" : 0.01,
         "total_time" : 100,
     	"algorithm_type" : "RRT",
-    	"hyper-parameters": "0 0"
+    	"hyper-parameters": [1000, 1]
     },
     "obstacles" : {
       "circle" : {

@@ -14,7 +14,7 @@ class Obstacle:
     def init_obs(self):
         if (self.shape_data["shape"] == "circle"):
             return circleObstacle(self.position, self.shape_data["radius"])
-        elif (self.shape_data["shape"] == "rectangle"):
+        elif (self.shape_data["shape"] == "rectangles"):
             return rectangleObstacle(self.position, self.shape_data["length"], self.shape_data["width"])
         elif (self.shape_data["shape"] == "triangle"):
             return triangleObstacle(self.position)

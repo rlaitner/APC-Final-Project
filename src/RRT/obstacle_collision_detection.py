@@ -1,5 +1,4 @@
 import numpy as np
-import obstacle
 import math
 from polygon_functions import *
 from point_obstacle_collision_detection import *

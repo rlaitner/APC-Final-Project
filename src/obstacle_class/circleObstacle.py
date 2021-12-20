@@ -19,5 +19,5 @@ class circleObstacle(Obstacle):
         
     def render_obstacle(self):
         x,y = (self.position[0], self.position[1])
-        circle = patches.Circle((x, y), self.radius, color="brown")
+        circle = patches.Circle((x, y), self.size, color="brown")
         return circle

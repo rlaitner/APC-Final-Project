@@ -75,7 +75,6 @@ class Agent():
 
         # Configure objects
         self._planner.set_config(algo_data, setting)
-        self.vehicle.set_config(vehicle_data)
 
         # Configure vehicle
         self.pos = np.asarray(algo_data["origin"])

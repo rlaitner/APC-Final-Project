@@ -8,7 +8,6 @@ class Car(Vehicle):
 
     def __init__(self, init_position, scale):
         
-        super().__init__(init_position)
         self.type = "car"
         L = 2 * scale
         W = 1.5 * scale        

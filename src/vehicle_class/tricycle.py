@@ -7,7 +7,6 @@ class Tricycle(Vehicle):
     
     def __init__(self, init_position, scale):
                 
-        super().__init__(init_position)
         self.type = "tricycle"
         L = 1 * scale
         W = 0.5 * scale

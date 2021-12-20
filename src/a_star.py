@@ -141,7 +141,7 @@ class A_star(PathingAlgorithm):
 
             # Get the current vertex: "x_vertex", i.e., the one that has the lowest value of F
             x_vertex, x_index = GetBestVertex(Q)  # Implement this function
-            ########################################################################################
+            
 
             # Check if we are at the goal vertex B
             if x_vertex == B_vertex:
@@ -194,46 +194,4 @@ class A_star(PathingAlgorithm):
 
 ############
 
-
-
-
-
-
-
-
-
-
-maze = [[0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 1, 1, 1, 0],
-        [0, 0, 1, 1, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 1, 1, 1, 1, 1, 1, 1, 1, 0],
-        [0, 0, 0, 0, 0, 0, 1, 1, 0, 0],
-        [0, 0, 0, 0, 1, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 1, 0, 1, 0, 0, 0],
-        [1, 1, 1, 1, 1, 0, 1, 1, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 1, 0, 0]]
-
-A = (0, 0)
-B = (7, 6)
-
-path = astar(maze, A, B)
-print(path)
-
-############################################################################################
-
-
-# Visualization
-%matplotlib inline
-import matplotlib.pyplot as plt
-import numpy as np
-
-maze_modified = 1.0 - np.array(maze)
-for v in path:
-    maze_modified[len(maze) - v[1] - 1][v[0]] = 0.8
-maze_modified[len(maze) - A[1] - 1][A[0]] = 0.7
-maze_modified[len(maze) - B[1] - 1][B[0]] = 0.7
-
-plt.imshow(maze_modified);  # , cmap='hot');
-plt.axis('off');
 

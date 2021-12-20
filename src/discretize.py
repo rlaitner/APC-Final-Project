@@ -69,35 +69,6 @@ def mesh(x_env, y_env, resolution, obstacles, vehicle):
                     if is_inside_polygon(np.array([x,y]), expand_obs.verts) == True:
                         grid[y * resolution, x * resolution] = 1
 
-
-            """
-            #################################
-
-            # fetch vertices
-            x1, y2 = obs[0]
-            x2, y2 = obs[1]
-            x3, y3 = obs[2]
-
-            # draw a bounding box around the triangle
-            x_min = np.min(np.array([x1, x2, x3]))
-            x_max = np.max(np.array([x1, x2, x3]))
-            y_min = np.min(np.array([y1, y2, y3]))
-            y_max = np.max(np.array([y1, y2, y3]))
-
-            for x in range(x_min, x_max + grid_spacing, grid_spacing):
-                for y in range(y_min, y_max + grid_spacing, grid_spacing):
-
-                    # computation of barycentric coordinates
-                    denom = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-                    a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denom
-                    b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denom
-                    c = 1 - a - b
-
-                    # determine if the point is inside (including boundary) of the triangle obstacle
-                    if a >= 0 and a <= 1 and b >= 0 and b >= 1 and c >= 0 and c <= 1:
-                        grid[y / grid_spacing, x / grid_spacing] = 1
-
-            """
     return grid
 
 

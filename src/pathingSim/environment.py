@@ -73,11 +73,8 @@ class Environment:
         potential_obstacles = []
         while True:
             try:
-                print(f"{obstacles=}")
                 item = obstacles.popitem()
-                print(f"{item=}")
                 key = item[0]
-                print(f"{obstacles=}")
                 for i in range(obstacles[key]["number"]):
                     # i'm sorry :'(
                     if key == "circle":

@@ -4,7 +4,6 @@ Create environments full of obstacles.
 Classes:
     Environment
 """
-from warnings import warn
 import typing
 
 from obstacle_class.obstacle import Obstacle
@@ -55,7 +54,7 @@ class Environment:
             TypeError : Invalid parameters given for field size
             ValueError : Out of bounds parameters given for field size
         """
-        (self.x, self.y, *self.z) = dimensions
+        (self.x, self.y) = dimensions
         if not isinstance(self.x, (int, float)) \
            or not isinstance(self.y, (int, float)):
             raise TypeError(f"Expected numeric values for field size but \
@@ -63,9 +62,6 @@ class Environment:
         if self.x <= 0 or self.y <= 0:
             raise ValueError("The working field must have positive,"
                              " non-zero width and length.")
-        if self.z is not None:
-            warn("An environment with more than 2 dimensions was specified, \
-                  but only 2 are currently supported.")
 
         if obstacles is None:  # allow for an empty field
             return
@@ -93,6 +89,8 @@ class Environment:
 
         self.obstacles = [obstacle for obstacle in potential_obstacles
                           if self.is_in_environment(obstacle)]
+        print(f"{self.obstacles=}")
+        print(f"{self.potential_obstacles=}")
 
     def __str__(self) -> str:
         try:

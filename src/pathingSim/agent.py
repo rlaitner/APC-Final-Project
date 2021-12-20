@@ -74,7 +74,7 @@ class Agent():
         self.goal= np.asarray(algo_data["goal"])
         self.heading: float = self.get_angle(self.goal)
 
-        self.trajectory = self.pos
+        self.trajectory = [tuple(self.pos)]
 
         vehicle_data["origin"] = [algo_data["origin"], self.heading]
 
@@ -154,5 +154,6 @@ class Agent():
                 pass
 
         # Move to the first point
-        self.trajectory = np.vstack((self.trajectory, self.pos))
+        self.trajectory.append(tuple(self.pos))
+
         self.heading = angle

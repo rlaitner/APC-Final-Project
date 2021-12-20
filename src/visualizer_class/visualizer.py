@@ -41,6 +41,7 @@ class Visualizer():
        
         line = np.zeros((len(path), 2))
         for i in range(0, len(path)):
+            print(path[i][0])
             line[i][0] = path[i][0]
             line[i][1] = path[i][1]
         plt.plot(line[:,0], line[:,1], color="black")

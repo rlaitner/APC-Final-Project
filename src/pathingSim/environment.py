@@ -91,6 +91,7 @@ class Environment:
                         else:
                             data = {k: v}
 
+                    data = {"shape": key}
                     obstacle_factory = Obstacle(pos, data)
                     obstacle = obstacle_factory.init_obs()
                     potential_obstacles.append(obstacle)

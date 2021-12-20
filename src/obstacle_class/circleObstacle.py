@@ -8,13 +8,13 @@ from matplotlib import patches as patches
 class circleObstacle(Obstacle):
     
     # Class for circle obstacles    
-    def __init__(self, position, radius):
+    def __init__(self, position, size):
         
         # position is center of circle
         super().__init__(position)
         self.shape = "circle"
         # Radius of circle object
-        self.radius = radius
+        self.size = size
         
         
     def render_obstacle(self):

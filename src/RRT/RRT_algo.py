@@ -1,6 +1,6 @@
 from pathingSim.pathing_algorithm import PathingAlgorithm
-from obstacle_collision_detection import *
-from point_obstacle_collision_detection import *
+from RRT.obstacle_collision_detection import *
+from RRT.point_obstacle_collision_detection import *
 import numpy as np
 from typing import List, Tuple
 

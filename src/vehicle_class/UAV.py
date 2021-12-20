@@ -1,9 +1,9 @@
-from vehicle_class.vehicle import Vehicle
 
+import numpy as np
 from matplotlib import patches as patches
 
 
-class UAV(Vehicle):
+class UAV:
 
     def __init__(self, init_position, scale):
         """

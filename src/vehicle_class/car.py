@@ -1,10 +1,9 @@
-from vehicle_class.vehicle import Vehicle
 
 import numpy as np
 from matplotlib import patches as patches
 
 
-class Car(Vehicle):
+class Car:
 
     def __init__(self, init_position, scale):
         

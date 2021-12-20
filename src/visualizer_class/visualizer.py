@@ -1,8 +1,14 @@
 from matplotlib import pyplot as plt
 from matplotlib import animation
 from matplotlib import patches as patches
-from obstacle_class import Obstacle, circleObstacle, triangleObstacle, rectangleObstacle
-from vehicle_class import Vehicle, Car, UAV, Tricycle
+from obstacle_class.obstacle import Obstacle 
+from obstacle_class.circleObstacle import circleObstacle
+from obstacle_class.triangleObstacle import triangleObstacle
+from obstacle_class.rectangleObstacle import rectangleObstacle
+from vehicle_class.vehicle import Vehicle
+from vehicle_class.car import Car 
+from vehicle_class.UAV import UAV
+from vehicle_class.tricycle import Tricycle
 
 import numpy as np
 

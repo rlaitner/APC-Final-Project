@@ -52,7 +52,7 @@ def algo_factory(chosen_algo: str, vehicle) -> PathingAlgorithm:
     }
 
     try:
-        return possible[chosen_algo]()
+        return possible[chosen_algo](vehicle)
     except KeyError:
         raise NotImplementedError(f"The specified algorithm {chosen_algo}" +
                                   " is invalid.")

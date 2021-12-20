@@ -31,7 +31,9 @@ class RRT(PathingAlgorithm):
             for i in range(len(self.path_list)):
                 # List of vertices
                 self.path_list.append([vertices[self.path_list[i]][0], vertices[self.path_list[i]][1]])
-                self.path_list.pop(0)
+            self.path_list.pop(0)
+
+            
 
         else:
             index = None

@@ -12,11 +12,11 @@ from pathingSim.pathing_algorithm import PathingAlgorithm
 # ---------------------------------------------------------------------
 # Add PathingAlgorithm implmentations here
 #from pathingSim.a_star import AStar
-from RRT.RRTalgo import RRT
+from RRT.RRT_algo import RRT
 # ---------------------------------------------------------------------
 
 
-def algo_factory(chosen_algo: str) -> PathingAlgorithm:
+def algo_factory(chosen_algo: str, vehicle) -> PathingAlgorithm:
     """
     Returns an instantiated implementation of a PathingAlgorithm
     object.
@@ -28,6 +28,9 @@ def algo_factory(chosen_algo: str) -> PathingAlgorithm:
         The possible algorithms currently are:
             "A*": The A* search algorithm
             "RRT": The rapidly-exploring random tree algorithm
+    vehicle: Vehicle
+        A vehicle object that is used to determine the size of the hit
+        box for collisions
 
     Returns
     -------

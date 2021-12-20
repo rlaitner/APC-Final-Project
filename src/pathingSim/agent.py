@@ -76,7 +76,7 @@ class Agent():
 
         self.trajectory = np.transpose(self.pos)
 
-        vehicle_data.append("origin" : {[algo_data["origin"], self.heading]})
+        vehicle_data.append({"origin" : [algo_data["origin"], self.heading]})
 
         # Instantiate objects
         self.vehicle: Vehicle = Vehicle(vehicle_data)

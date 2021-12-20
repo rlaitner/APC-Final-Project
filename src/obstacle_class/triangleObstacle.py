@@ -3,7 +3,6 @@ triangleObstacle subclass
 '''
 
 import numpy as np
-from obstacle import Obstacle
 from matplotlib import patches as patches
 
     
@@ -13,7 +12,6 @@ class triangleObstacle(Obstacle):
     def __init__(self, position):
         
         # vertices
-        super().__init__(position)
         self.shape = "triangle"
         # Lines that form the triangle
         self.verts = (self.position[0], self.position[1], 

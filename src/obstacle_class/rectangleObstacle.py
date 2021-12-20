@@ -3,7 +3,6 @@ rectangleObstacle subclass
 '''
 
 import numpy as np
-from obstacle import Obstacle
 from matplotlib import patches as patches
 
 
@@ -13,7 +12,6 @@ class rectangleObstacle(Obstacle):
     def __init__(self, position, length, width):
         
         # Starting point of rectangle of which length and width are referenced to
-        super().__init__(position)
         self.shape = "rectangle"
         # Length of rectangle object
         self.length = length

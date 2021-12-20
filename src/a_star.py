@@ -3,85 +3,17 @@ import obstacles
 import vehicle_class
 
 
-def mesh(x_env, y_env, grid_spacing, obstacles: List[Tuple[np.ndarray, float]]):
-    """ Discretize the environment """
-
-    grid = np.zeros((y_env / grid_spacing, x_env / grid_spacing))
-
-    for i in range(len(obstacles)):
-
-        ob = obstacles[i]
-
-        # If obstacle is a rectangle
-        if len(ob) != 2 and obs[0] == tuple:
-
-            origin = ob.origin
-            horizontal = ob.width
-            vertical = ob.length
-
-            for x in range(origin[0], origin[0] + horizontal + grid_spacing, grid_spacing):
-                for y in range(origin[1], origin[1] + vertical + grid_spacing, grid_spacing):
-                    grid[y / grid_spacing, x / grid_spacing] = 1
-
-        # Obstacle is a circle
-        elif len(ob) == 2:
-
-            center = ob.center
-            x_c = center[0]
-            y_c = center[1]
-            r = ob.radius
-
-            for x in range(x_c - r, x_c + r + grid_spacing, grid_spacing):
-                for y in range(y_c - r, y_c + r + grid_spacing, grid_spacing):
-                    if (x - x_c) ** 2 + (y - y_c) ** 2 <= r ** 2:
-                        grid[y / grid_spacing, x / grid_spacing] = 1
-
-        # triangle obstacle
-        else:
-
-            # fetch vertices
-            x1, y2 = ob[0]
-            x2, y2 = ob[1]
-            x3, y3 = ob[2]
-
-            # draw a bounding box around the triangle
-            x_min = np.min(np.array([x1, x2, x3]))
-            x_max = np.max(np.array([x1, x2, x3]))
-            y_min = np.min(np.array([y1, y2, y3]))
-            y_max = np.max(np.array([y1, y2, y3]))
-
-            for x in range(x_min, x_max + grid_spacing, grid_spacing):
-                for y in range(y_min, y_max + grid_spacing, grid_spacing):
-
-                    # computation of barycentric coordinates
-                    denom = ((y2 - y3) * (x1 - x3) + (x3 - x2) * (y1 - y3))
-                    a = ((y2 - y3) * (x - x3) + (x3 - x2) * (y - y3)) / denom
-                    b = ((y3 - y1) * (x - x3) + (x1 - x3) * (y - y3)) / denom
-                    c = 1 - a - b
-
-                    # determine if the point is inside (including boundary) of the triangle obstacle
-                    if a >= 0 and a <= 1 and b >= 0 and b >= 1 and c >= 0 and c <= 1:
-                        grid[y / grid_spacing, x / grid_spacing] = 1
-
-
-return grid
-
-
-
-
-
-
 class Vertex():
     """A class for vertices"""
     def __init__(self, parent=None, position=None):
         self.parent = parent  # Keeps track of parent of a vertex
         self.position = position  # Keeps track of position of a vertex
 
-        self.C = float('inf')  # Estimate of cost-to-come
-        self.H = 0  # Heuristic
-        self.F = float('inf')  # F = C + H (as in class)
+        self.C = float('inf')  # Initialize cost-to-come (origin -> current vertex)
+        self.H = 0  # Initialize cost-to-go (current vertex -> goal)
+        self.F = float('inf')  # total cost F = C + H
 
-    def __eq__(self, other):  # Allows you to check if two vertices are the same by doing "vertex_1 == vertex_2"
+    def __eq__(self, other):  # Check if two vertices are the same by doing "vertex_1 == vertex_2"
         return self.position == other.position
 
 

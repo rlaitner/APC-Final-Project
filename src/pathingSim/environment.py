@@ -6,6 +6,8 @@ Classes:
 """
 import typing
 
+from numpy.lib.function_base import iterable
+
 from obstacle_class.obstacle import Obstacle
 
 
@@ -67,9 +69,10 @@ class Environment:
             return
 
         potential_obstacles = []
+        obstacles_clone = obstacles.copy()
         while True:
             try:
-                item = obstacles.popitem()
+                item = obstacles_clone.popitem()
                 key = item[0]
                 for i in range(obstacles[key]["number"]):
                     # i'm sorry :'(
@@ -82,15 +85,20 @@ class Environment:
                     else:
                         raise ValueError("Received an invalid obstacle type.")
 
-                    data = {k:v[i] for (k, v) in obstacles[key].items()}
-                    potential_obstacles.append(Obstacle(pos, data))
+                    for (k, v) in obstacles[key].items():
+                        if not isinstance(v, int):
+                            data = {k: v[i]}
+                        else:
+                            data = {k: v}
+
+                    obstacle_factory = Obstacle(pos, data)
+                    obstacle = obstacle_factory.init_obs()
+                    potential_obstacles.append(obstacle)
             except KeyError:
                 break
-
         self.obstacles = [obstacle for obstacle in potential_obstacles
                           if self.is_in_environment(obstacle)]
-        print(f"{self.obstacles=}")
-        print(f"{self.potential_obstacles=}")
+        print(f"{potential_obstacles=}")
 
     def __str__(self) -> str:
         try:

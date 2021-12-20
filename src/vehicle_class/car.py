@@ -1,14 +1,12 @@
-from vehicle_class.vehicle import Vehicle
 
 import numpy as np
 from matplotlib import patches as patches
 
 
-class Car(Vehicle):
+class Car:
 
     def __init__(self, init_position, scale):
         
-        super().__init__(init_position)
         self.type = "car"
         L = 2 * scale
         W = 1.5 * scale        

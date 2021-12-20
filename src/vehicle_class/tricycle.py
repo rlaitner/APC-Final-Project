@@ -1,13 +1,11 @@
-from vehicle_class.vehicle import Vehicle
 
 import numpy as np
 from matplotlib import patches as patches
 
-class Tricycle(Vehicle):
+class Tricycle:
     
     def __init__(self, init_position, scale):
                 
-        super().__init__(init_position)
         self.type = "tricycle"
         L = 1 * scale
         W = 0.5 * scale

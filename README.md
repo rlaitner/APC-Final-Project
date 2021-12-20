@@ -40,7 +40,8 @@ for installation directions for your operating system.
 
 Ensure you are located in the ``docs`` directory and choose either ``make html``
 or ``make latexpdf`` for output options. Output will be located in the ``docs/build``
-directory.   
+directory. ``index.rst`` houses the home directory page for HTML. Open in
+web browser to view and click through the documentation.  
 
 ## Project Status
 

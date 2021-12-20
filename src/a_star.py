@@ -19,9 +19,6 @@ class A_star(PathingAlgorithm):
     make_route(np.ndarray[float, float])
         Takes in a starting location and navigates a viable route to a
         goal
-    set_config(Dict[str, Union[str, float, List]])
-        Sets the necessary hyperparameters for a path planning algo to
-        use
     """
 
     def __init__(self):
@@ -115,7 +112,6 @@ class A_star(PathingAlgorithm):
 
         return H
 
-    ##########################################################################################
 
     ######### This is the function that implements A star #########
     def make_route(grid, A, B):
@@ -134,14 +130,14 @@ class A_star(PathingAlgorithm):
         Q = []
         Q.append(A_vertex)
         DeadSet = []
-        ############################################################################################
+
 
         # Loop until you get to the goal
         while len(Q) > 0:
 
             # Get the current vertex: "x_vertex", i.e., the one that has the lowest value of F
             x_vertex, x_index = GetBestVertex(Q)  # Implement this function
-            
+
 
             # Check if we are at the goal vertex B
             if x_vertex == B_vertex:
@@ -159,25 +155,17 @@ class A_star(PathingAlgorithm):
             Q.remove(Q[x_index])
 
             DeadSet.append(x_vertex)
-            #####################################################################################
+
 
             # Generate neighbors
             neighbors = getNeighbors(x_vertex, grid, resolution)
-            #####################################################################################
+
 
             # Loop through neighbors, update costs, etc.
             for x_prime in neighbors:
 
                 if x_prime in DeadSet:
                     continue
-
-                # x_vertex.C = abs(x.position[0] - A_vertex.position[0]) + abs(x.position[1] - A_vertex.position[1])
-                # x_vertex.H = computeH(x_vertex,B_vertex)
-                # x_vertex.F = x_vertex.C + x_vertex.H
-
-                # x_prime.C = abs(x.position[0] - A_vertex.position[0]) + abs(x.position[1] - A_vertex.position[1])
-                # x_prime.H = computeH(x_prime,B_vertex)
-                # x_prime.F = x_vertex.C + x_vertex.H
 
                 tentative_C = x_vertex.C + 1
 
@@ -188,10 +176,5 @@ class A_star(PathingAlgorithm):
                     x_prime.F = x_prime.C + x_prime.H
                     if x_prime not in Q:
                         Q.append(x_prime)
-
-            ##########################################################
-
-
-############
 
 

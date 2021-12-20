@@ -106,7 +106,7 @@ class Agent():
         if len(point) != len(self.pos):
             raise ValueError("Received a trajectory position that has" +
                              " the wrong number of dimensions.")
-        if self.pos == point:
+        if (self.pos == point).all():
             return 0
 
         dot_prod = np.dot(self.pos, point)

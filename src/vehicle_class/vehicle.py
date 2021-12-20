@@ -37,11 +37,14 @@ class Vehicle:
         init_position = vehicle_data["origin"]
         self.x_init = init_position[0]
         self.y_init = init_position[1]
+        self.init_position = init_position
         self.type = None
-
-        if (vehicle_data["vehicle_type"] == "UAV"):
-            return UAV(init_position, vehicle_data["vehicle_size"])
-        elif (vehicle_data["vehicle_type"] == "car"):
-            return Car(init_position, vehicle_data["vehicle_size"])
-        elif (vehicle_data["vehicle_type"] == "tricycle"):
-            return Tricycle(init_position, vehicle_data["vehicle_size"])
+        self.vehicle_data = vehicle_data
+    
+    def init_vehicle(self)
+        if (self.vehicle_data["vehicle_type"] == "UAV"):
+            return UAV(self.init_position, self.vehicle_data["vehicle_size"])
+        elif (self.vehicle_data["vehicle_type"] == "car"):
+            return Car(self.init_position, self.vehicle_data["vehicle_size"])
+        elif (self.vehicle_data["vehicle_type"] == "tricycle"):
+            return Tricycle(self.init_position, self.vehicle_data["vehicle_size"])

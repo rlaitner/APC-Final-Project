@@ -1,14 +1,33 @@
+'''
+Create UAV vehicle for path planning.
+
+Classes:
+    UAV
+'''
+
 
 import numpy as np
 from matplotlib import patches as patches
 
 
 class UAV:
+    '''
+    Create a vehicle object
+
+    Attributes:
+    -----------------------
+
+    type: String
+        vehicle type
+
+    size : double 
+        radius of the circle 
+    
+    shape : 
+    '''
 
     def __init__(self, init_position, scale):
-        """
 
-        """
         self.type = "UAV"
         R = 0.5 * scale
         self.size = R
@@ -16,6 +35,8 @@ class UAV:
 
 
     def update_dynamics(self, x, y, U, dt=0.5):
+
+
         x_dot = U[0]
         y_dot = U[1]
 

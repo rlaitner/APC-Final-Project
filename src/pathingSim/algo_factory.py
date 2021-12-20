@@ -11,7 +11,7 @@ from typing import Type, Dict
 from pathingSim.pathing_algorithm import PathingAlgorithm
 # ---------------------------------------------------------------------
 # Add PathingAlgorithm implmentations here
-from pathingSim.a_star import AStar
+#from pathingSim.a_star import AStar
 from RRT.RRTalgo import RRT
 # ---------------------------------------------------------------------
 
@@ -44,7 +44,7 @@ def algo_factory(chosen_algo: str) -> PathingAlgorithm:
     # add new PathingAlgorithm to this dictionary to instantiate them
     possible: Dict[str, Type[PathingAlgorithm]]
     possible = {
-        "A*": AStar,
+        #"A*": AStar,
         "RRT": RRT
     }
 

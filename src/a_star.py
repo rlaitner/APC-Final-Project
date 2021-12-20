@@ -24,7 +24,7 @@ class A_star(PathingAlgorithm):
         goal
     """
 
-    def __init__(self,vehicle, algo_dict, setting, resolution):
+    def __init__(self, vehicle, algo_dict, setting, resolution):
         self.vehicle = vehicle
         self.origin = algo_dict["origin"]
         self.goal = algo_dict["goal"]

@@ -35,6 +35,9 @@ User provides config file with adjusted parameters.
 
  
 ## Build Sphinx Documentation 
+If you do not already have Sphinx installed please see [Sphinx Installation](https://www.sphinx-doc.org/en/master/usage/installation.html)
+for installation directions for your operating system. 
+
 Ensure you are located in the ``doc`` directory and choose either ``make html``
 or ``make latexpdf`` for output options. Output will be located in the ``build``
 directory.   

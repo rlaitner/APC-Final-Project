@@ -40,6 +40,13 @@ class Car:
         
         return car_position
 
+
+    def check_dynamics(self, pos_0, pos_f):
+        if np.abs(pos_0[2]-pos_f[2])/dt >= (np.pi/2)
+            return 1
+        else: 
+            return 0
+
     def render_vehicle(self, position):
         def calc_origin(d, position):
             psi = 45 - position[2] 

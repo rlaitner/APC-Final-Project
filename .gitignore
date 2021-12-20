@@ -9,3 +9,5 @@ src/pathingSim.egg-info/SOURCES.txt
 src/pathingSim.egg-info/top_level.txt
 tests/__pycache__/__init__.cpython-38.pyc
 tests/__pycache__/test_package.cpython-38-pytest-6.2.5.pyc
+src/RRT/.DS_store
+src/.DS_store

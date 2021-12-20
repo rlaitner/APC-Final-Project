@@ -66,7 +66,7 @@ class Simulator():
 
     def run(self) -> bool:
         """Simulates the world for a predetermined amount of time"""
-        num_steps = self.time_horizon // self.time_step
+        num_steps = int(self.time_horizon // self.time_step)
         steps = np.linspace(0, self.time_horizon, num=num_steps)
 
         # is it initially in the goal set?

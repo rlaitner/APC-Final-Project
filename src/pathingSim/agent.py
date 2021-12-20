@@ -69,19 +69,21 @@ class Agent():
         setting: Environment
             An obstacles filled environment to path through
         """
-        # Instantiate objects
-        self.vehicle: Vehicle = Vehicle(vehicle_data["vehicle_type"])
-        self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"], self.vehicle)
-
-        # Configure objects
-        self._planner.set_config(algo_data, setting)
-
         # Configure vehicle
         self.pos = np.asarray(algo_data["origin"])
         self.goal= np.asarray(algo_data["goal"])
         self.heading: float = self.get_angle(self.goal)
 
         self.trajectory = np.transpose(self.pos)
+
+        vehicle_data["origin"].append([algo_data["origin"], self.heading])
+
+        # Instantiate objects
+        self.vehicle: Vehicle = Vehicle(vehicle_data)
+        self._planner: PathingAlgorithm = algo_factory(algo_data["algorithm_type"], self.vehicle)
+
+        # Configure objects
+        self._planner.set_config(algo_data, setting)
 
     def get_angle(self, point) -> float:
         """

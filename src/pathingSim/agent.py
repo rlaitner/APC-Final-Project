@@ -135,20 +135,18 @@ class Agent():
         """
         # The number of attempts before the dynamics are declared infeasible
         MAX_ATTEMPTS = 100
+        EPSILON = 0.00002
 
         for attempt in range(MAX_ATTEMPTS):
             # Get infinite-time horizon path
-            pathx, pathy = self._planner.make_route(self.pos)
+            _, pathy = self._planner.make_route(self.pos)
 
             # Check that the finite time horizon is dynamically-viable
-            angle = self.get_angle(np.array([pathx[0], pathy[0]]))
-            self.pos = self.vehicle.check_dynamics(pathx[0], pathy[0], angle)
+            angle = self.get_angle(np.array([pathy[0], pathy[1]]))
+            self.pos = self.vehicle.check_dynamics(pathy[0], pathy[1], angle)
 
-            print(f"{self.pos=}")
-            print(f"{pathy=}")
-            print(f"{pathx=}")
             # If it found a trajectory, good, if it didn't then how many times has it failed?
-            if pathx[0] == self.pos[0] and pathy[0] == self.pos[1]:
+            if abs(pathy[0] - self.pos[0]) < EPSILON and abs(pathy[1] - self.pos[1]) < EPSILON:
                 break
             elif attempt == (MAX_ATTEMPTS - 1):
                 raise RuntimeError("The goal is dynamically unreachable.")

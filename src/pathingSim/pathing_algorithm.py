@@ -7,8 +7,7 @@ Classes
 PathingAlgorithm
 """
 from abc import ABC, abstractmethod
-from typing import Dict, List, Union, Tuple, Type
-import numpy as np
+from typing import Dict, List, Union, Type
 
 from pathingSim.environment import Environment
 
@@ -28,8 +27,8 @@ class PathingAlgorithm(ABC):
     """
     @abstractmethod
     def make_route(self,
-                   origin: np.ndarray[float, float]
-                   ) -> Tuple[np.ndarray, np.ndarray]:
+                   origin
+                   ):
         """
         Generates a route from a given location to a preassigned goal
         location.

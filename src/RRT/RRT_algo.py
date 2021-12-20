@@ -11,9 +11,9 @@ class RRT(PathingAlgorithm):
 
     def make_route(self, origin):
         if self.path_list is None:
-            vertices, parents = rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle, self.goal)
-            index = nearest_vertex(self.goal, vertices)
-            self.path_list = backtrack(index, parents)
+            vertices, parents = self.rrt(origin, self.width, self.height, self.obstacles, self.trials, self.step_size, self.vehicle, self.goal)
+            index = self.nearest_vertex(self.goal, vertices)
+            self.path_list = self.backtrack(index, parents)
             for i in range(len(path_verts)):
                 # List of vertices
                 self.path_list.append([vertices[path_verts[i]][0], vertices[path_verts[i]][1]])

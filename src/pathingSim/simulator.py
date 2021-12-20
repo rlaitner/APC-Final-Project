@@ -21,7 +21,7 @@ class Simulator():
     def __init__(self, config_file: str) -> None:
         # Acquire config options
         path = Path(config_file)
-        if path.is_file is not True:
+        if path.is_file() is not True:
             raise FileNotFoundError(f"Config file '{config_file}' does" +
                                     " not exist.")
         with open(config_file) as f:

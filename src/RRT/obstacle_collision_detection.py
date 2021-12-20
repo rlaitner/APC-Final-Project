@@ -194,7 +194,6 @@ def free_vehicle(vehicle, new_position, obstacles):
     """
     
     vehicle.position = new_position
-    print(vehicle.position)
     for o in obstacles:
         
         # If the vehicle is a circle/UAV

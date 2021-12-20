@@ -124,7 +124,6 @@ def extend(origin, target, step_size: float=0.2):
    
     # Check Euclidean distance and move in that direction based on step size 
     dist = np.sqrt((origin[0]-target[0])**2 + (origin[1] - target[1])**2)
-    print(type(step_size))
     if dist < step_size:
         return target 
     else: 
@@ -211,4 +210,4 @@ def backtrack(index, parents):
     for i in range(0, len(path_reverse)):
         path.append(path_reverse[len(path_reverse) - i - 1])
         
-    return path 
+    return path

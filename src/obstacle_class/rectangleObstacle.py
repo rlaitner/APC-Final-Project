@@ -19,14 +19,11 @@ class rectangleObstacle(Obstacle):
         self.length = length
         # Width of rectangle object
         self.width = width
-<<<<<<< HEAD
         self.verts = [[position[0], position[1]],
                       [position[0], position[1] + length],
                       [position[0] + width, position[1] + length],
                       [position[0] + width, position[1]]]
                       
-=======
->>>>>>> 49f1966530fcf0afa8396091b30f4948440b0cd7
         # Lines that form the rectangle
         self.lines = np.array([[(position[0], position[1]), (position[0] + width, position[1])],
                       [(position[0], position[1]), (position[0], position[1] + length)],

@@ -7,7 +7,7 @@ Classes:
 
 from vehicle_class.UAV import UAV
 from vehicle_class.car import Car
-from vehicle_class.tricycle import tricycle
+from vehicle_class.tricycle import Tricycle
 
 class Vehicle:
 
